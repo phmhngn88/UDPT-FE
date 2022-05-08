@@ -1,0 +1,11 @@
+{
+  "name": "UDPT-FE",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:phmhngn88/UDPT-FE.git",
+  "author": "Phạm Hoàng An <anphamimpala@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.0.24"
+  }
+}
