@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <?php require("include/meta.phtml"); ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="topbar">
+        <span class="logo">FOOTBALL MANAGEMENT</span>
+        <span>
+            <?php
+            if (isset($_SESSION["IsLogined"]) && $_SESSION["IsLogined"] == True) {
+                $username = $_SESSION["UserName"];
+                echo "<span class='username'>Xin chào <strong>$username</strong> | </span>";
+            } else
+                echo ' <span class="login">
+                <a href="index.php?action=login">Đăng nhập</a> |
+            </span>';
+            ?>
+
+            <span class="logout"> <a href="index.php?action=logout"> Đăng xuất</a>
+            </span>
+        </span>
+
+    </div>
+    <div id="wrapper">
+        <div id="smallbar"></div>
+        <div id="content">
+            <div id="sidebar">
+                <?php require("include/sidebar.phtml"); ?>
+            </div>
+
+            <div id="main">
+                <?php require($VIEW); ?>
+            </div>
+
+        </div>
+        <div id="footer"></div>
+    </div>
+</body>
+
+</html>
