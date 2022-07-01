@@ -1,0 +1,177 @@
+<h1>ĐĂNG KÝ</h1>
+<hr />
+
+<div>
+    <?php if ($role == null || $role == '') : ?>
+        <h2>
+            Bạn muốn đăng ký tài khoản với vai trò
+
+        </h2>
+        <div class='d-flex justify-content-space-around'>
+            <a class="none-decoration" href="index.php?action=register&role=customer" style="color:white;">
+                <div class="customer d-flex align-items-center justify-center" style="cursor:pointer; color:white;width: 150px; height: 100px; background-color: #ff6464">
+                    Customer
+                </div>
+            </a>
+
+            <a class="none-decoration" href="index.php?action=register&role=shop" style="color:white;">
+                <div class="shop d-flex align-items-center justify-center" style="cursor:pointer; color:white;width: 150px; height: 100px; background-color: #60c8f9">
+                    Shop
+                </div>
+            </a>
+
+            <a class="none-decoration" href="index.php?action=register&role=shipper" style="color:white;">
+                <div class="shipper d-flex align-items-center justify-center" style="cursor:pointer; color:white;width: 150px; height: 100px; background-color: #33dc00">
+                    Shipper
+                </div>
+            </a>
+
+        </div>
+    <?php elseif ($role == "shipper") : ?>
+        <div>
+            <a href="index.php?action=register"> <button class="default">Quay lại</button>
+            </a>
+        </div>
+        <br />
+        <form action="index.php?action=register&role=shipper" method="post">
+            <div>
+                <span style="display:inline-block; width:200px">Tên đăng nhập:</span> <input name="UserName" type="text" />
+
+            </div>
+            <br />
+            <div>
+                <span style="display:inline-block; width:200px">Mật khẩu: </span> <input name="Password" type="password" />
+
+            </div>
+            <br />
+            <div>
+                <span style="display:inline-block; width:200px">Số điện thoại: </span> <input name="phone" type="text" />
+            </div>
+            <br />
+            <div>
+                <span style="display:inline-block; width:200px">Email: </span> <input name="email" type="email" />
+            </div>
+            <br />
+            <div>
+                <span style="display:inline-block; width:200px">Họ tên: </span> <input name="full_name" type="text" />
+            </div>
+            <br />
+            <div>
+                <span style="display:inline-block; width:200px">Địa chỉ: </span> <input name="address" type="text" />
+            </div>
+            <br />
+            <div>
+                <span style="display:inline-block; width:200px">CMND/CCCD: </span> <input name="identity" type="text" />
+            </div>
+            <br />
+            <div>
+                <span style="display:inline-block; width:200px">Số tài khoản ngân hàng: </span> <input name="bank_account" type="text" />
+            </div>
+            <br />
+            <div>
+                <span style="display:inline-block; width:200px">Khu vực hoạt động: </span> <input name="work_zone" type="text" />
+            </div>
+            <br />
+            <div><b style="color: red"><?= $data ?></b></div>
+            <br />
+            <input type="hidden" value=<?= $role ?> />
+            <button class="primary full-width" type="submit">Đăng ký</button>
+        </form>
+    <?php elseif ($role == "customer") : ?>
+        <div>
+            <a href="index.php?action=register"> <button class="default">Quay lại</button>
+            </a>
+        </div>
+        <br />
+    
+        <form action="index.php?action=register&role=customer" method="post">
+            <div>
+                <span style="display:inline-block; width:200px">Tên đăng nhập:</span> <input name="UserName" type="text" />
+
+            </div>
+            <br />
+            <div>
+                <span style="display:inline-block; width:200px">Mật khẩu: </span> <input name="Password" type="password" />
+
+            </div>
+            <br />
+            <div>
+                <span style="display:inline-block; width:200px">Số điện thoại: </span> <input name="phone" type="text" />
+            </div>
+            <br />
+            <div>
+                <span style="display:inline-block; width:200px">Email: </span> <input name="email" type="email" />
+            </div>
+            <br />
+            <div>
+                <span style="display:inline-block; width:200px">Họ tên: </span> <input name="full_name" type="text" />
+            </div>
+            <br />
+            <div>
+                <span style="display:inline-block; width:200px">Địa chỉ: </span> <input name="address" type="text" />
+            </div>
+            <br />
+            <div>
+                <span style="display:inline-block; width:200px">CMND/CCCD: </span> <input name="identity" type="text" />
+            </div>
+            <br />
+            <div>
+                <span style="display:inline-block; width:200px">Số tài khoản ngân hàng: </span> <input name="bank_account" type="text" />
+            </div>
+
+            <div><b style="color: red"><?= $data ?></b></div>
+            <br />
+            <input type="hidden" value=<?= $role ?> />
+            <button class="primary full-width" type="submit">Đăng ký</button>
+        </form>
+    <?php elseif ($role == "shop") : ?>
+        <div>
+            <a href="index.php?action=register"> <button class="default">Quay lại</button>
+            </a>
+        </div>
+        <br />
+        <form action="index.php?action=register&role=shop" method="post" class="mt-24">
+            <div class="d-flex align-items-start">
+                <span style="display:inline-block; width:200px">Tên đăng nhập:</span> <input name="UserName" type="text" />
+
+            </div>
+            <br />
+            <div class="d-flex align-items-start">
+                <span style="display:inline-block; width:200px">Mật khẩu: </span> <input name="Password" type="password" />
+
+            </div>
+            <br />
+            <div class="d-flex align-items-start">
+                <span style="display:inline-block; width:200px">Số điện thoại: </span> <input name="phone" type="text" />
+            </div>
+            <br />
+
+            <div class="d-flex align-items-start">
+                <span style="display:inline-block; width:200px">Email: </span> <input name="email" type="email" />
+            </div>
+            <br />
+            <div class="d-flex align-items-start">
+                <span style="display:inline-block; width:200px">Tên cửa hàng: </span> <input name="name" type="text" />
+            </div>
+            <br />
+
+            <div class="d-flex align-items-start">
+                <span style="display:inline-block; width:200px">Địa chỉ: </span> <input name="location" type="text" />
+            </div>
+            <br />
+            <div class="d-flex align-items-start">
+                <span style="display:inline-block; width:200px">Mô tả: </span> <textarea name="description"></textarea>
+            </div>
+            <br />
+            <div class="d-flex align-items-start">
+                <span style="display:inline-block; width:200px">Số tài khoản ngân hàng: </span> <input name="bank_account" type="text" />
+            </div>
+            <br />
+            <div><b style="color: red"><?= $data ?></b></div>
+            <br />
+            <input type="hidden" value=<?= $role ?> />
+            <button class="primary full-width" type="submit">Đăng ký</button>
+        </form>
+    <?php endif; ?>
+
+</div>

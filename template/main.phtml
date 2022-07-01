@@ -9,20 +9,29 @@
 
 <body>
     <div id="topbar">
-        <span class="logo">FOOTBALL MANAGEMENT</span>
+        <span class="logo">Supper Ship</span>
         <span>
             <?php
             if (isset($_SESSION["IsLogined"]) && $_SESSION["IsLogined"] == True) {
                 $username = $_SESSION["UserName"];
-                echo "<span class='username'>Xin chào <strong>$username</strong> | </span>";
+                echo "<span class='username'>Xin chào <strong>$username</strong> <span style='color:white;'>|</span></span>";
             } else
                 echo ' <span class="login">
-                <a href="index.php?action=login">Đăng nhập</a> |
+                <a href="index.php?action=login&role">Đăng nhập</a> <span style="color:white;">|</span>
             </span>';
             ?>
 
-            <span class="logout"> <a href="index.php?action=logout"> Đăng xuất</a>
-            </span>
+            <?php
+            if (isset($_SESSION["IsLogined"]) && $_SESSION["IsLogined"] == True) {
+                $username = $_SESSION["UserName"];
+                echo " <span class='logout' > <a href='index.php?action=logout'> Đăng xuất</a>
+                </span>";
+            } else
+                echo ' <span class="login">
+                <a href="index.php?action=register&role">Đăng ký</a>
+            </span>';
+            ?>
+
         </span>
 
     </div>

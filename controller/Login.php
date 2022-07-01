@@ -1,5 +1,6 @@
 <?php
 
+require_once('API.php');
 class LoginController
 {
     //add this function at any function of controller which require to authorize
@@ -12,9 +13,12 @@ class LoginController
     public function logout()
     {
         unset($_SESSION["IsLogined"]);
-        header("Location:index.php?action=login");
+        unset($_SESSION["UserName"]);
+        unset($_SESSION["Token"]);
+        
+        header("Location:index.php");
         $data = "";
-        $VIEW = "./view/Login.phtml";
+        $VIEW = "./view/Home.phtml";
         require("./template/main.phtml");
 
     }
@@ -30,19 +34,30 @@ class LoginController
         if (count($_POST) >= 0 && isset($_POST["UserName"])) {
             $username = $_POST["UserName"];
             $password = $_POST["Password"];
+            $API = new API();
+            $url = "http://localhost:3000/api/users/login";
+            $method = "POST";
+            $payload = array(
+                "username" => $username, "password" => $password,
+            );
 
-            if (UserModel::login($username, $password) == 1) {
+            $result = $API->CallAPI($method, $url, $payload);
+
+            if ($result->message == "Success") {
                 $_SESSION["IsLogined"] = True;
                 $_SESSION["UserName"] = $username;
-                header("Location:index.php");
+                $_SESSION["Token"] = $result->data->token;
+                // header("Location:index.php");
+                $data = "thanhf cong";
+                $VIEW = "./view/Login.phtml";
             }
              else {
-                $data = "Thông tin đăng nhập bị sai, nhập lại thông tin !!!";
+                $data = $result->message;
                 $VIEW = "./view/Login.phtml";
             }
         } else {
-            $data = "";
             $VIEW = "./view/Login.phtml";
+            $data = "";
         }
         require("./template/main.phtml");
     }
