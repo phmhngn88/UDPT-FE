@@ -3,6 +3,7 @@ session_start();
 
 require_once("./controller/Login.php");
 require_once("./controller/Register.php");
+require_once ("./controller/Shop.php");
 require_once("./controller/Home.php");
 require_once("config/dbconnect.php");
 
@@ -28,7 +29,26 @@ switch ($action) {
         $controller = new RegisterController();
         $controller->register();
         break;
-
+    case "updateShop":
+        $controller = new ShopController();
+        $controller->updateShop();
+        break;
+    case "shipping-history":
+        $controller = new ShipperController();
+        $controller->ViewShippingHistory();
+        break;
+    case "search-shipping-history":
+        $controller = new ShipperController();
+        $controller->SearchShippingHistory();
+        break;
+    case "shipping-order-detail":
+        $controller = new ShipperController();
+        $controller->ShippingOrderDetail();
+        break;
+    case "delivering":
+        $controller = new ShipperController();
+        $controller->DeliveringOrder();
+        break;
     default:
         $controller = new HomeController();
         $controller->index();

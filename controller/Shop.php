@@ -9,11 +9,10 @@ class ShopController
         $loginController = new LoginController();
         $loginController -> authentication();
 
-        if (count($_POST) >= 0 && $_REQUEST["role"] == "shop") {
-            print_r($_POST);
+        if (count($_POST) > 0 && $_SESSION["role"] == "shop") {
             $API = new API();
             $url = "http://localhost:3000/api/shops/update";
-            $method = "PUT";
+            $method = "POST";
             $payload = array();
 
             $name = $_POST["name"];
@@ -28,22 +27,25 @@ class ShopController
                 "bank_account" => $bank_account, "name" => $name,
                 "location" => $location, "description" => $description,
             );
-
-            $data = "Đang ở trong update Shop";
-            $role = "shop";
-            $VIEW = "./view/updateShop.phtml";
-            require("./template/main.phtml");
             $result = $API->CallAPI($method, $url, $payload);
-        }elseif ($_REQUEST["role"] === "shop"){
-            print_r($_POST);
+            if ($result->success == true) {
+                $data = "Đang ở trong update Shop";
+                $role = "shop";
+                $VIEW = "./view/Home.phtml";
+            }else{
+                print_r($payload);
+                $data = "Đang ở trong update Shop";
+                $role = "shop";
+                $VIEW = "./view/updateShop.phtml";
+            }
+            require("./template/main.phtml");
+
+        }elseif ($_SESSION["role"] == "shop"){
             $role = $_REQUEST['role'];
             $data = "Đang ở trong update Shop";
             $VIEW = "./view/updateShop.phtml";
             require("./template/main.phtml");
         }else{
-            print_f($_REQUEST["role"]);
-            print_r($_POST);
-//            print_r(isset($_REQUEST["role"]));
             $data = "Đang ở trong update Shop";
             $role = "shop";
             $VIEW = "./view/updateShop.phtml";
