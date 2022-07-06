@@ -33,6 +33,10 @@ switch ($action) {
         $controller = new ShopController();
         $controller->updateShop();
         break;
+    case "addProduct":
+        $controller = new ShopController();
+        $controller->addProduct();
+        break;
     case "shipping-history":
         $controller = new ShipperController();
         $controller->ViewShippingHistory();

@@ -54,36 +54,11 @@ class ShopController
 
     }
 
-    public function login()
+    public function addProduct()
     {
-        if (count($_POST) >= 0 && isset($_POST["UserName"])) {
-            $username = $_POST["UserName"];
-            $password = $_POST["Password"];
-            $API = new API();
-            $url = "http://localhost:3000/api/users/login";
-            $method = "POST";
-            $payload = array(
-                "username" => $username, "password" => $password,
-            );
-
-            $result = $API->CallAPI($method, $url, $payload);
-
-            if ($result->message == "Success") {
-                $_SESSION["IsLogined"] = True;
-                $_SESSION["UserName"] = $username;
-                $_SESSION["Token"] = $result->data->token;
-                // header("Location:index.php");
-                $data = "thanhf cong";
-                $VIEW = "./view/Login.phtml";
-            }
-            else {
-                $data = $result->message;
-                $VIEW = "./view/Login.phtml";
-            }
-        } else {
-            $VIEW = "./view/Login.phtml";
-            $data = "";
-        }
+        $loginController = new LoginController();
+        $loginController -> authentication();
+        $VIEW = "./view/addProduct.phtml";
         require("./template/main.phtml");
     }
 }
