@@ -47,9 +47,9 @@ class LoginController
                 $_SESSION["IsLogined"] = True;
                 $_SESSION["UserName"] = $username;
                 $_SESSION["Token"] = $result->data->token;
-                // header("Location:index.php");
-                $data = "thanhf cong";
-                $VIEW = "./view/Login.phtml";
+                $_SESSION["role"] = $result->data->role;
+                header("Location:index.php");
+
             }
              else {
                 $data = $result->message;

@@ -3,7 +3,6 @@ session_start();
 
 require_once("./controller/Login.php");
 require_once("./controller/Register.php");
-require_once("./controller/Shop.php");
 require_once("./controller/Home.php");
 require_once("config/dbconnect.php");
 
@@ -28,10 +27,6 @@ switch ($action) {
     case "register":
         $controller = new RegisterController();
         $controller->register();
-        break;
-    case "updateShop":
-        $controller = new ShopController();
-        $controller->updateShop();
         break;
 
     default:

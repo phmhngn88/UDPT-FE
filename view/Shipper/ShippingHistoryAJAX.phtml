@@ -1,0 +1,91 @@
+<?php
+require_once("constant.php");
+
+?>
+
+<script type="text/javascript">
+    function onChangeCurrentPage(page, size) {
+
+        search(page, size)
+
+        let currentPage = $("#current-page")[0]
+
+        if (currentPage) {
+            currentPage.innerHTML = page
+        }
+
+    }
+</script>
+<table class="custom-table">
+    <tr style="height: 40px">
+
+        <th style="width: 250px">
+            Mã đơn
+        </th>
+        <th style="width: 250px">
+            Ngày
+        </th>
+        <th style="text-align: center;width: 150px">
+            Tổng sản phẩm
+        </th>
+        <th style="text-align: center;width: 150px">
+            Tổng tiền
+        </th>
+        <th>
+            Trạng thái
+        </th>
+    </tr>
+
+
+    <?php
+
+
+    foreach ($data->data as $key => $item) {
+    ?>
+
+
+        <tr style="height: 40px">
+            <td>
+                <a target="_blank" href="index.php?action=shipping-order-detail&id=<?=$item->_id ?>" class="decoration-none"> <?= $item->_id ?>
+                </a>
+            </td>
+            <td>
+                <?= $item->created_at ?>
+            </td>
+            <td style="text-align: center;">
+                <?= $item->total_product ?>
+            </td>
+            <td style="text-align: center;">
+                <?= $item->total_cost ?>
+            </td>
+            <td>
+
+
+                <?= $item->status == ORDER_STATUS_SHIP_SUCCESS ?
+                    "<span style='border-radius: 8px; padding: 8px; background: #2cb104; color: white;'>Thành công</span>"
+                    : ($item->status == ORDER_STATUS_SHIP_FAILED ? "<span style='border-radius: 8px; padding: 8px; background: #ff6464; color: white;'>Thất bại</span>" : "<span style='border-radius: 8px; padding: 8px; background: #ff6464; color: white;'>Không nhận</span>")  ?>
+
+            </td>
+        </tr>
+
+    <?php
+    }
+    ?>
+</table>
+<span>
+
+</span>
+
+<div class="paging">
+    <div class="current-page mx-24">
+        Trang hiện tại: <span><?= $data->page ?></span>
+    </div>
+    <?php
+
+    for ($i = 1; $i <= ceil($data->total / (10 * 1.0)); $i++) {
+    ?>
+        <span class="pointer paging-item" onclick="onChangeCurrentPage(<?= $i ?>, 10)"><?= $i ?></span>
+    <?php
+    }
+    ?>
+</div>

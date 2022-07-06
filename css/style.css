@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body {
     margin: 0 0 0 0;
     background-color: #CCCCCC;
@@ -53,6 +54,9 @@ a.none-decoration {
 .justify-content-start {
     justify-content: start;
 }
+.justify-content-end {
+    justify-content: end;
+}
 
 .flex-column {
     flex-direction: column;
@@ -86,7 +90,7 @@ a.none-decoration {
     width: 267px;
 }
 
-.border-rad-5{
+.border-rad-5 {
     border-radius: 5px;
 }
 
@@ -94,7 +98,8 @@ a.none-decoration {
     margin-top: 8px;
 }
 
-.logout a, .login a {
+.logout a,
+.login a {
     color: white;
     text-decoration: none;
 }
@@ -131,7 +136,6 @@ a.none-decoration {
 #wrapper {
     width: 100%;
     margin-top: 10px;
-    width: 920px;
     display: inline-block;
 }
 
@@ -156,26 +160,23 @@ a.none-decoration {
 
 #main {
     min-height: 650px;
-    padding-left: 10px;
-    padding-right: 10px;
-    float: right;
-    width: 650px;
-    background-color: #FFFFFF;
+    padding-left: 40px;
+    padding-right: 40px;
+     background-color: #FFFFFF;
     text-align: left;
     height: 85vh;
 
     overflow-x: auto;
-
+    width: 100%;
 }
 
 #sidebar {
     min-height: 650px;
     text-align: left;
-    float: left;
-    width: 250px;
+
     height: 85vh;
     background-color: #F7F7F7;
-
+    min-width: 200px;
 }
 
 .m-24 {
@@ -207,6 +208,7 @@ h3 {
 input[type=text],
 input[type=password],
 input[type=email],
+input[type=date],
 textarea,
 select {
     -webkit-border-radius: 5px;
@@ -297,6 +299,7 @@ select {
     border-bottom: 1px solid #fff;
     color: #669;
     border-top: 1px solid transparent;
+    height: 32px;
 }
 
 .custom-table tr:hover td {
@@ -344,8 +347,8 @@ select,
 input[type=text],
 input[type=password],
 input[type=email],
-textarea
- {
+input[type=date],
+textarea {
     border: 1px solid #999;
     outline: 0;
     height: 30px;
@@ -376,4 +379,32 @@ button.primary {
 
 textarea {
     resize: vertical;
-  }
+}
+
+.h-32 {
+    height: 32px;
+}
+
+input[type="text"].h-28 {
+    height: 28px;
+}
+
+input[type="date"]::-webkit-clear-button {
+    display: none;
+}
+
+input[type=date]::-webkit-search-cancel-button {
+    display: none;
+}
+
+.grow-1 {
+    flex-grow: 1;
+}
+
+.grow-11 {
+    flex-grow: 11;
+}
+
+.align-items-end {
+    align-items: end;
+}
