@@ -4,6 +4,7 @@ session_start();
 require_once("./controller/Login.php");
 require_once("./controller/Register.php");
 require_once("./controller/Home.php");
+require_once("./controller/Admin.php");
 require_once("config/dbconnect.php");
 
 $action = "";
@@ -27,6 +28,31 @@ switch ($action) {
     case "register":
         $controller = new RegisterController();
         $controller->register();
+        break;
+
+    case "listShipper":
+        $controller = new AdminController();
+        $controller->listShipper();
+        break;
+
+    case "admin":
+        $controller = new AdminController();
+        $controller->index();
+        break;
+
+    case "listStore":
+        $controller = new AdminController();
+        $controller->listStore();
+        break;
+
+    case "listCustomer":
+        $controller = new AdminController();
+        $controller->listCustomer();
+        break;
+
+    case "listReview":
+        $controller = new AdminController();
+        $controller->listReview();
         break;
 
     default:
