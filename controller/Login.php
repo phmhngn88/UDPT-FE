@@ -48,7 +48,7 @@ class LoginController
                 $_SESSION["IsLogined"] = True;
                 $_SESSION["UserName"] = $username;
                 $_SESSION["Token"] = $result->data->token;
-                $_SESSION["Role"] = $result->data->role;
+                $_SESSION["role"] = $result->data->role;
                 // header("Location:index.php");
                 $role = $result->data->role;
                 $data = "thành công";
@@ -58,6 +58,8 @@ class LoginController
                 } else {
                     $VIEW = "./view/Login.phtml";
                 }
+                header("Location:index.php");
+
             }
              else {
                 $data = $result->message;

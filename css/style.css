@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body {
   margin: 0 0 0 0;
   background-color: #cccccc;
@@ -51,6 +52,9 @@ a.none-decoration {
 .justify-content-start {
   justify-content: start;
 }
+.justify-content-end {
+    justify-content: end;
+}
 
 .flex-column {
   flex-direction: column;
@@ -85,7 +89,11 @@ a.none-decoration {
 }
 
 .border-rad-5 {
+<<<<<<< HEAD
   border-radius: 5px;
+=======
+    border-radius: 5px;
+>>>>>>> ffe42db98296a2646fb943be6e9490c6f84f1e54
 }
 
 .mt-8 {
@@ -94,8 +102,13 @@ a.none-decoration {
 
 .logout a,
 .login a {
+<<<<<<< HEAD
   color: white;
   text-decoration: none;
+=======
+    color: white;
+    text-decoration: none;
+>>>>>>> ffe42db98296a2646fb943be6e9490c6f84f1e54
 }
 
 .username {
@@ -128,10 +141,16 @@ a.none-decoration {
 }
 
 #wrapper {
+<<<<<<< HEAD
   width: 100%;
   margin-top: 10px;
   width: 920px;
   display: inline-block;
+=======
+    width: 100%;
+    margin-top: 10px;
+    display: inline-block;
+>>>>>>> ffe42db98296a2646fb943be6e9490c6f84f1e54
 }
 
 #smallbar {
@@ -152,6 +171,7 @@ a.none-decoration {
 }
 
 #main {
+<<<<<<< HEAD
   min-height: 650px;
   padding-left: 10px;
   padding-right: 10px;
@@ -171,6 +191,26 @@ a.none-decoration {
   width: 250px;
   height: 85vh;
   background-color: #f7f7f7;
+=======
+    min-height: 650px;
+    padding-left: 40px;
+    padding-right: 40px;
+     background-color: #FFFFFF;
+    text-align: left;
+    height: 85vh;
+
+    overflow-x: auto;
+    width: 100%;
+}
+
+#sidebar {
+    min-height: 650px;
+    text-align: left;
+
+    height: 85vh;
+    background-color: #F7F7F7;
+    min-width: 200px;
+>>>>>>> ffe42db98296a2646fb943be6e9490c6f84f1e54
 }
 
 .m-24 {
@@ -199,9 +239,16 @@ h3 {
   color: #9d370f;
 }
 
+<<<<<<< HEAD
 input[type="text"],
 input[type="password"],
 input[type="email"],
+=======
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=date],
+>>>>>>> ffe42db98296a2646fb943be6e9490c6f84f1e54
 textarea,
 select {
   -webkit-border-radius: 5px;
@@ -285,11 +332,20 @@ select {
 }
 
 .custom-table td {
+<<<<<<< HEAD
   padding: 8px;
   background: #e8edff;
   border-bottom: 1px solid #fff;
   color: #669;
   border-top: 1px solid transparent;
+=======
+    padding: 8px;
+    background: #e8edff;
+    border-bottom: 1px solid #fff;
+    color: #669;
+    border-top: 1px solid transparent;
+    height: 32px;
+>>>>>>> ffe42db98296a2646fb943be6e9490c6f84f1e54
 }
 
 .custom-table tr:hover td {
@@ -340,6 +396,15 @@ textarea {
   outline: 0;
   height: 30px;
   width: 275px;
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=date],
+textarea {
+    border: 1px solid #999;
+    outline: 0;
+    height: 30px;
+    width: 275px;
 }
 
 button {
@@ -387,4 +452,34 @@ textarea {
   width: 100%;
   height: 75%;
   background-image: url("https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80");
+}
+    resize: vertical;
+}
+
+.h-32 {
+    height: 32px;
+}
+
+input[type="text"].h-28 {
+    height: 28px;
+}
+
+input[type="date"]::-webkit-clear-button {
+    display: none;
+}
+
+input[type=date]::-webkit-search-cancel-button {
+    display: none;
+}
+
+.grow-1 {
+    flex-grow: 1;
+}
+
+.grow-11 {
+    flex-grow: 11;
+}
+
+.align-items-end {
+    align-items: end;
 }

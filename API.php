@@ -25,10 +25,13 @@ class API
                     $url = sprintf("%s?%s", $url, http_build_query($data));
                 break;
         }
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
 
         // Optional Authentication:
-        // curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        // curl_setopt($curl, CURLOPT_USERPWD, "username:password");
+        $header   = array();
+        $header[] = 'authorization:' . $_SESSION["Token"];
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
+
 
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -38,5 +41,15 @@ class API
         curl_close($curl);
 
         return json_decode($result);
+    }
+}
+
+class PagingRes
+{
+    function __construct()
+    {
+        $this->data = array();
+        $this->total = 0;
+        $this->page = 1;
     }
 }
