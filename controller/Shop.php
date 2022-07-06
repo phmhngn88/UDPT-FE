@@ -58,7 +58,46 @@ class ShopController
     {
         $loginController = new LoginController();
         $loginController -> authentication();
-        $VIEW = "./view/addProduct.phtml";
-        require("./template/main.phtml");
+        if (count($_POST) > 0 && $_SESSION["role"] == "shop") {
+            $API = new API();
+            $url = "http://localhost:3000/api/shops/insertProduct";
+            $method = "POST";
+            $payload = array();
+
+            $name = $_POST["name"];
+            $description = $_POST["description"];
+            $inventory = $_POST["inventory"];
+            $unit_price = $_POST["unit_price"];
+            $unit = $_POST["unit"];
+            $product_type = $_POST["product_type"];
+            $role = $_REQUEST["role"];
+
+            $payload = array(
+                "name" => $name, "description" => $description,
+                "$inventory" => $inventory, "unit_price" => $unit_price,
+                "unit" => $unit, "product_type" => $product_type,
+            );
+            print_r($payload);
+            $result = $API->CallAPI($method, $url, $payload);
+            if ($result->success == true) {
+                $data = "Đang ở trong update Shop";
+                $role = "shop";
+                $VIEW = "./view/Home.phtml";
+            }else{
+                print_r($payload);
+                $data = "Đang ở trong update Shop";
+                $role = "shop";
+                $VIEW = "./view/addProduct.phtml";
+            }
+            require("./template/main.phtml");
+
+        }elseif ($_SESSION["role"] == "shop"){
+            $VIEW = "./view/addProduct.phtml";
+            require("./template/main.phtml");
+        }else{
+            $role = "shop";
+            $VIEW = "./view/Home.phtml";
+            require("./template/main.phtml");
+        }
     }
 }
