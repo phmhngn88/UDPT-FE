@@ -4,7 +4,7 @@ session_start();
 require_once("./controller/Login.php");
 require_once("./controller/Register.php");
 require_once("./controller/Home.php");
-require_once("config/dbconnect.php");
+require_once("./controller/Shipper.php");
 
 $action = "";
 if (isset($_REQUEST["action"])) {
@@ -27,6 +27,22 @@ switch ($action) {
     case "register":
         $controller = new RegisterController();
         $controller->register();
+        break;
+    case "shipping-history":
+        $controller = new ShipperController();
+        $controller->ViewShippingHistory();
+        break;
+    case "search-shipping-history":
+        $controller = new ShipperController();
+        $controller->SearchShippingHistory();
+        break;
+    case "shipping-order-detail":
+        $controller = new ShipperController();
+        $controller->ShippingOrderDetail();
+        break;
+    case "delivering":
+        $controller = new ShipperController();
+        $controller->DeliveringOrder();
         break;
 
     default:

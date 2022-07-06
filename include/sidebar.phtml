@@ -1,15 +1,23 @@
 
 <div class="sidebox">
     <h2>Các chức năng</h2>
-    <div class="menu">
-        <ul>
-            <li>
-                <a href="index.php">Trang chủ</a>
-            </li>
-
-
+    <?php if (isset($_SESSION["IsLogined"]) && $_SESSION["IsLogined"] == True && $_SESSION["role"] == "shipper"): ?>
+        <div class="menu">
+            <ul>
+                <li>
+                    <a href="index.php">Trang chủ</a>
+                </li>
+                <li>
+                    <a href="index.php?action=shipping-history">Lịch sử giao hàng</a>
+                </li>
+                <li>
+                    <a href="index.php?action=delivering">Đơn đang giao</a>
+                </li>
+                <li>
+                    <a href="index.php?action=update-health">Cập nhật thông tin sức khỏe</a>
+                </li>
+            </ul>
     
-        </ul>
-  
-    </div>
+        </div>
+    <?php endif ?>
 </div>

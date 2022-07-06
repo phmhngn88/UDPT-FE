@@ -1,0 +1,93 @@
+<?php
+require_once("constant.php");
+
+?>
+
+<script type="text/javascript">
+    let search = function(currentPage, currentSize) {
+
+        let page = currentPage ?? 1;
+        let size = currentSize ?? 10;
+        let order_id = $("#search-order-id")[0].value
+        let status = $("#select-order-status")[0].value
+
+
+        let from = $("#search-from-date")[0].value;
+        let to = $("#search-to-date")[0].value;
+
+        $.post({
+            url: `index.php?action=search-shipping-history`,
+            data: {
+                page,
+                size,
+                order_id,
+                status,
+                from,
+                to
+
+            },
+            success: function(response) {
+                $("#result-shipping-history-list").html(response)
+
+            }
+        });
+
+
+    };
+
+    $(document).ready(function() {
+
+        const now = new Date().toISOString().substring(0, 10);
+        // $("#search-from-date")[0].val = now;
+        // $("#search-to-date")[0].val = now;
+        document.getElementById('search-from-date').value = now;
+        document.getElementById('search-to-date').value = now;
+
+        let from = $("#search-from-date")[0].value;
+        let to = $("#search-to-date")[0].value;
+    });
+</script>
+<h1>Lịch sử giao hàng</h1>
+<hr />
+
+<div id="search-advance" class="mt-24">
+
+    <div class="d-flex align-items-start justify-content-space-between">
+        <div class="d-flex justify-content-space-between align-items-space-between flex-column">
+            <label for="search-order-id">ID đơn hàng </label> <br />
+
+            <input id="search-order-id" class="w-275 h-28" type="text" />
+
+        </div>
+        <div class="d-flex justify-content-space-between align-items-space-between flex-column ">
+            <label for="search-from-date">Từ ngày </label>
+            <br />
+
+            <input id="search-from-date" class="w-275 h-24" type="date" />
+        </div>
+        <div class="d-flex justify-content-space-between align-items-space-between flex-column ">
+            <label for="search-to-date">Đến ngày </label> <br />
+            <input id="search-to-date" class="w-275 h-24" type="date" />
+        </div>
+    </div>
+    <div class="mt-24 d-flex ">
+
+        <div class="d-flex justify-content-space-between align-items-space-between flex-column ">
+            <label for="select-order-status">Trạng thái </label> <br />
+            <select name="select-order-status" id="select-order-status" class="h-32">
+                <option value="all"> Tất cả </option>
+                <option value=<?= ORDER_STATUS_SHIP_SUCCESS ?>> Giao thành công</option>
+                <option value=<?= ORDER_STATUS_SHIP_FAILED ?>> Giao hàng thất bại</option>
+            </select>
+        </div>
+        <div class="full-width d-flex align-items-end justify-content-end" >
+            <button class="primary h-32" style="width: 300px" onclick="search()">Tìm</button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<div id="result-shipping-history-list" class="mt-24" style="overflow: auto"></div>

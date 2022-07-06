@@ -65,6 +65,7 @@ class RegisterController
                 $_SESSION["IsLogined"] = True;
                 $_SESSION["UserName"] = $username;
                 $_SESSION["Token"] = $result->data->token;
+                $_SESSION["role"] = $result->data->role;
                 header("Location:index.php");
             }
              else {
