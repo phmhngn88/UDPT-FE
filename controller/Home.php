@@ -6,5 +6,6 @@ class HomeController
     {
         $VIEW = "./view/Home.phtml";
         require("./template/main.phtml");
+
     }
 }
