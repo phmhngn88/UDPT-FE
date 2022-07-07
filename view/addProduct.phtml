@@ -1,0 +1,48 @@
+<h1>Thêm Sản Phẩm</h1>
+<hr />
+<div>
+    <a href="index.php"> <button class="default">Quay lại</button>
+    </a>
+</div>
+<br />
+<form action="index.php?action=addProduct&role=shop" method="post" class="mt-24">
+    <div class="d-flex align-items-start">
+        <span style="display:inline-block; width:200px">Tên sản phầm: </span> <input name="name" type="text" />
+    </div>
+    <br />
+    <br />
+    <div class="d-flex align-items-start">
+        <span style="display:inline-block; width:200px">Mô tả: </span> <textarea name="description"></textarea>
+    </div>
+    <br />
+    <div class="d-flex align-items-start">
+        <span style="display:inline-block; width:200px">Số lượng: </span> <textarea name="inventory"></textarea>
+    </div>
+    <br />
+    <div class="d-flex align-items-start">
+        <span style="display:inline-block; width:200px">Gia tiền: </span> <input name="unit_price" type="text" />
+    </div>
+    <br />
+    <div class="d-flex align-items-start">
+        <span style="display:inline-block; width:200px">Đơn vị: </span> <input name="unit" type="text" />
+    </div>
+    <br />
+    <div class="d-flex align-items-start">
+        <label  for="product_type">Loại sản phẩm</label>
+        <select name="product_type">
+            <option value=''>-----SELECT-----</option>
+            <?php
+            $API = new API();
+            $url = "http://localhost:3000/api/productCategories/getAll";
+            $method = "GET";
+            $payload = array();
+            $result = $API->CallAPI($method, $url, $payload);
+
+            foreach ($result->data as $row) {
+                echo "<option value='$row->_id'>".$row->name."</option>";
+            }
+            ?>
+        </select>
+    </div>
+    <button class="primary full-width" type="submit">Cập Nhật</button>
+</form>

@@ -1,18 +1,19 @@
 <h1>ĐĂNG NHẬP</h1>
 <hr />
 
-<form action="index.php?action=login" method="post">
-    <div>
-        <span style="display:inline-block; width:200px">Tên đăng nhập:</span> <input name="UserName" type="text" />
+<form action="index.php?action=login" method="post" class="px-100 mt-24">
+    <div class="d-flex justify-content-space-between">
+        <span style="display:inline-block; width:200px">Tên đăng nhập:</span> <input name="UserName" type="text" style="width: 500px"/>
 
     </div>
     <br />
-    <div>
-        <span style="display:inline-block; width:200px">Mật khẩu: </span> <input name="Password" type="password" />
+    <div class="d-flex justify-content-space-between">
+        <span style="display:inline-block; width:200px">Mật khẩu: </span> <input name="Password" type="password" style="width: 500px"/>
 
     </div>
     <br />
     <div><b style="color: red"><?= $data ?></b></div>
+    <div><b style="color: red"><?= $role ?></b></div>
     <br />
     <button class="primary full-width" type="submit">Đăng nhập</button>
 </form>

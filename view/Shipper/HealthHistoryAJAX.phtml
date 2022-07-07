@@ -1,0 +1,88 @@
+<?php
+require_once("constant.php");
+
+?>
+
+<script type="text/javascript">
+    function onChangeCurrentPage(page, size) {
+
+        search(page, size)
+
+        let currentPage = $("#current-page")[0]
+
+        if (currentPage) {
+            currentPage.innerHTML = page
+        }
+
+    }
+</script>
+<table class="custom-table">
+    <tr style="height: 40px">
+
+        <th style="width: 250px">
+            Ngày
+        </th>
+        <th style="width: 250px">
+            Ngày dương tính COVID
+        </th>
+        <th style="text-align: center;width: auto">
+            Tình trạng
+        </th>
+        <th style="text-align: center;width: auto">
+            Nhiệt độ cơ thể
+        </th>
+        <th style="text-align: center;width: auto">
+            Triệu chứng
+        </th>
+    </tr>
+
+
+    <?php
+
+
+    foreach ($data->data as $key => $item) {
+    ?>
+
+
+        <tr style="height: 40px">
+
+            <td>
+                <?= $item->date ?>
+            </td>
+            <td>
+                <?= $item->positive_date ?>
+            </td>
+            <td style="text-align: center;">
+                <?= $item->health_status ?>
+            </td>
+            <td style="text-align: center;">
+                <?= $item->temperature ?>
+            </td>
+            <td style="text-align: center;" >
+
+                <?= $item->symptom ?>
+
+            </td>
+        </tr>
+
+    <?php
+    }
+    ?>
+</table>
+<span>
+
+</span>
+
+<div class="paging">
+    <div class="current-page mx-24">
+        Trang hiện tại: <span><?= $data->page ?></span>
+    </div>
+    <?php
+
+    for ($i = 1; $i <= ceil($data->total / (10 * 1.0)); $i++) {
+    ?>
+        <span class="pointer paging-item" onclick="onChangeCurrentPage(<?= $i ?>, 10)"><?= $i ?></span>
+    <?php
+    }
+    ?>
+</div>
