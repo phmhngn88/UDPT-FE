@@ -16,6 +16,7 @@ class LoginController
         unset($_SESSION["UserName"]);
         unset($_SESSION["Token"]);
         unset($_SESSION["role"]);
+        
         header("Location:index.php");
         $data = "";
         $role="";
@@ -48,15 +49,27 @@ class LoginController
                 $_SESSION["UserName"] = $username;
                 $_SESSION["Token"] = $result->data->token;
                 $_SESSION["role"] = $result->data->role;
+                // header("Location:index.php");
+                $role = $result->data->role;
+                $data = "thành công";
+                if($role == "admin") {
+                    $VIEW = "./view/Admin/Dashboard.html";
+                    require("./template/admin.phtml");
+                } else {
+                    $VIEW = "./view/Login.phtml";
+                }
                 header("Location:index.php");
             } else {
                 $data = $result->message;
                 $VIEW = "./view/Login.phtml";
+                require("./template/main.phtml");
             }
         } else {
             $VIEW = "./view/Login.phtml";
             $data = "";
         }
-        require("./template/main.phtml");
+        if($_SESSION["Role"] != "admin") {
+            require("./template/main.phtml");
+        }
     }
 }

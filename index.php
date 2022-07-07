@@ -6,7 +6,9 @@ require_once("./controller/Register.php");
 require_once ("./controller/Shop.php");
 require_once ("./controller/Shipper.php");
 require_once("./controller/Home.php");
+require_once("./controller/Admin.php");
 require_once("config/dbconnect.php");
+require_once("./controller/Shipper.php");
 
 $action = "";
 if (isset($_REQUEST["action"])) {
@@ -73,6 +75,46 @@ switch ($action) {
     case "get-new-order-by-shipper":
         $controller = new ShipperController();
         $controller->GetNewOrderByShipper();
+        break;
+
+    case "viewShipper":
+        $controller = new AdminController();
+        $controller->viewShipper();
+        break;
+
+    case "listShipper":
+        $controller = new AdminController();
+        $controller->listShipper();
+        break;
+
+    case "admin":
+        $controller = new AdminController();
+        $controller->index();
+        break;
+
+    case "viewStore":
+        $controller = new AdminController();
+        $controller->viewStore();
+        break;
+        
+    case "listStore":
+        $controller = new AdminController();
+        $controller->listStore();
+        break;
+
+    case "viewCustomer":
+        $controller = new AdminController();
+        $controller->viewCustomer();
+        break;
+        
+    case "listCustomer":
+        $controller = new AdminController();
+        $controller->listCustomer();
+        break;
+
+    case "listReview":
+        $controller = new AdminController();
+        $controller->listReview();
         break;
 
     default:
