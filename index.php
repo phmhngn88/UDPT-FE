@@ -47,6 +47,11 @@ switch ($action) {
         $controller->DeliveringOrder();
         break;
 
+    case "viewShipper":
+        $controller = new AdminController();
+        $controller->viewShipper();
+        break;
+
     case "listShipper":
         $controller = new AdminController();
         $controller->listShipper();
@@ -57,11 +62,21 @@ switch ($action) {
         $controller->index();
         break;
 
+    case "viewStore":
+        $controller = new AdminController();
+        $controller->viewStore();
+        break;
+        
     case "listStore":
         $controller = new AdminController();
         $controller->listStore();
         break;
 
+    case "viewCustomer":
+        $controller = new AdminController();
+        $controller->viewCustomer();
+        break;
+        
     case "listCustomer":
         $controller = new AdminController();
         $controller->listCustomer();
