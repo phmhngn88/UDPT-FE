@@ -16,10 +16,10 @@ class LoginController
         unset($_SESSION["UserName"]);
         unset($_SESSION["Token"]);
         unset($_SESSION["role"]);
-        
+
         header("Location:index.php");
         $data = "";
-        $role="";
+        $role = "";
         $VIEW = "./view/Home.phtml";
         require("./template/main.phtml");
     }
@@ -52,32 +52,28 @@ class LoginController
                 // header("Location:index.php");
                 $role = $result->data->role;
                 $data = "thành công";
-                if($role == "admin") {
-                    $role=$result->data->role;
+                if ($role == "admin") {
+                    $role = $result->data->role;
                     $VIEW = "./view/Admin/Dashboard.html";
                     require("./template/admin.phtml");
-                } else {
-                    $role ="";
-                    $data="";
-                    $VIEW = "./view/Login.phtml";
+                    header("Location:index.php?action=admin");
                 }
                 header("Location:index.php");
             } else {
                 $data = $result->message;
-                $role="";
+                $role = "";
                 $VIEW = "./view/Login.phtml";
                 require("./template/main.phtml");
             }
         } else {
             $VIEW = "./view/Login.phtml";
             $data = "";
-            $role="";
+            $role = "";
             require("./template/main.phtml");
-
         }
-        if( isset($_SESSION["role"])  && $_SESSION["role"] != "admin") {
-            $data="";
-            $role="";
+        if (isset($_SESSION["role"])  && $_SESSION["role"] != "admin") {
+            $data = "";
+            $role = "";
             require("./template/main.phtml");
         }
     }

@@ -93,6 +93,7 @@ class ShopController
 
         }elseif ($_SESSION["role"] == "shop"){
             $VIEW = "./view/addProduct.phtml";
+            $role="shop";
             require("./template/main.phtml");
         }else{
             $role = "shop";
@@ -125,7 +126,7 @@ class ShopController
             $payload = array(
                 "name" => $name, "description" => $description,
                 "$inventory" => $inventory, "unit_price" => $unit_price,
-                "unit" => $unit, "product_type" => $product_type, "product_id" => $product_id
+                "unit" => $unit, "product_type" => $product_type, "product_id" => $id
             );
             print_r($payload);
             $result = $API->CallAPI($method, $url, $payload);
@@ -156,6 +157,7 @@ class ShopController
         $loginController = new LoginController();
         $loginController -> authentication();
         $VIEW = "./view/shop/AllProductByShop.phtml";
+        $role="";
         require("./template/main.phtml");
     }
 }

@@ -120,6 +120,7 @@
     $(document).ready(function() {
 
         const role = $("#main-role")[0].value
+        console.log("zxc", role)
         if (role.includes("shipper")) {
             newOrderByShipperInterval = setInterval(getNewOrderByShipper, 5000)
         } else {
