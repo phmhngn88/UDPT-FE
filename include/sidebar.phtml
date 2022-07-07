@@ -1,4 +1,3 @@
-
 <div class="sidebox">
     <h2>Các chức năng</h2>
     <?php if (isset($_SESSION["IsLogined"]) && $_SESSION["IsLogined"] == True && $_SESSION["role"] == "shipper"): ?>
@@ -14,10 +13,29 @@
                     <a href="index.php?action=delivering">Đơn đang giao</a>
                 </li>
                 <li>
-                    <a href="index.php?action=update-health">Cập nhật thông tin sức khỏe</a>
+                    <a href="index.php?action=health-history">Thông tin sức khỏe</a>
                 </li>
             </ul>
-    
+
+        </div>
+    <?php endif ?>
+    <?php if (isset($_SESSION["IsLogined"]) && $_SESSION["IsLogined"] == True && $_SESSION["role"] == "shop"): ?>
+        <div class="menu">
+            <ul>
+                <li>
+                    <a href="index.php"><br>Trang chủ<br/></a>
+                </li>
+                <li>
+                    <a href="index.php?action=updateShop&role"><br>Cập nhật thông tin Shop<br/></a>
+                </li>
+                <li>
+                    <a href="index.php?action=addProduct"><br>Thêm sản phẩm<br/></a>
+                </li>
+                <li>
+                    <a href="index.php?action=updateProduct"><br>Cập nhật thông tin sản phẩm<br/></a>
+                </li>
+            </ul>
+
         </div>
     <?php endif ?>
 </div>

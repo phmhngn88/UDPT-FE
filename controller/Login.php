@@ -19,9 +19,9 @@ class LoginController
         
         header("Location:index.php");
         $data = "";
+        $role="";
         $VIEW = "./view/Home.phtml";
         require("./template/main.phtml");
-
     }
 
     public function unauthorized_page()
@@ -59,9 +59,7 @@ class LoginController
                     $VIEW = "./view/Login.phtml";
                 }
                 header("Location:index.php");
-
-            }
-             else {
+            } else {
                 $data = $result->message;
                 $VIEW = "./view/Login.phtml";
                 require("./template/main.phtml");

@@ -1,0 +1,64 @@
+<script type="text/javascript">
+    let search = function(currentPage, currentSize) {
+
+        let page = currentPage ?? 1;
+        let size = currentSize ?? 10;
+
+        let from = $("#search-from-date")[0].value;
+        let to = $("#search-to-date")[0].value;
+
+        $.post({
+            url: `index.php?action=search-health-history`,
+            data: {
+                page,
+                size,
+                from,
+                to
+
+            },
+            success: function(response) {
+                $("#health-history").html(response)
+
+            }
+        });
+
+
+    };
+    $(document).ready(function() {
+
+        const now = new Date().toISOString().substring(0, 10);
+
+        document.getElementById('date').value = now;
+    });
+</script>
+
+<form action="index.php?action=post-health-history" class="px-100" method="POST">
+
+    <div class="mt-24 d-flex justify-content-space-between">
+        <span style="display:inline-block; width:200px">Ngày:</span> <input id="date" name="date" type="date" style="width: 500px" />
+
+    </div>
+    <br />
+    <div class="d-flex justify-content-space-between">
+        <span style="display:inline-block; width:200px">Ngày dương tính COVID: </span> <input id="positive_date" name="positive_date" type="date" style="width: 500px" />
+
+    </div>
+    <br />
+    <div class="d-flex justify-content-space-between">
+        <span style="display:inline-block; width:200px">Tình trạng sức khỏe: </span> <input id="health_status" name="health_status" type="text" style="width: 500px" />
+    </div>
+    <br />
+    <div class="d-flex justify-content-space-between">
+        <span style="display:inline-block; width:200px">Nhiệt độ cơ thể: </span> <input id="temperature" name="temperature" type="number" style="width: 500px" />
+    </div>
+    <br />
+    <div class="d-flex justify-content-space-between">
+        <span style="display:inline-block; width:200px">Triệu chứng: </span> <input id="symptom" name="symptom" type="text" style="width: 500px" />
+    </div>
+    <br />
+
+
+    <div><b style="color: red"><?= $data ?></b></div>
+    <br />
+    <button class="primary full-width" type="submit">Cập nhật</button>
+</form>

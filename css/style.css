@@ -148,10 +148,8 @@ a.none-decoration {
 }
 
 #content {
-  min-height: 650px;
-  /* overflow, background -> keep the columns in equal height */
-  overflow: hidden;
-  background: url("images/css/container-bd.png") repeat-y;
+    min-height: 650px;
+    overflow: hidden;
 }
 
 #main {
@@ -201,10 +199,11 @@ h3 {
   color: #9d370f;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="date"],
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=number],
+input[type=date],
 textarea,
 select {
   -webkit-border-radius: 5px;
@@ -336,10 +335,11 @@ select {
 }
 
 select,
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="date"],
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=number],
+input[type=date],
 textarea {
   border: 1px solid #999;
   outline: 0;
@@ -366,6 +366,10 @@ button.danger {
 
 button.primary {
   background: #0096de;
+}
+
+button.success {
+    background: rgb(18, 184, 18);
 }
 
 textarea {
@@ -419,5 +423,14 @@ input[type="date"]::-webkit-search-cancel-button {
 }
 
 .align-items-end {
-  align-items: end;
+    align-items: end;
+}
+
+.px-100 {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.ml-8 {
+    margin-left: 8px;
 }
