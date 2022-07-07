@@ -9,4 +9,11 @@ define("ORDER_STATUS_SHIPPER_ACCEPT_ORDER", "2");
 define("ORDER_STATUS_SHIP_SUCCESS", "3");
 define("ORDER_STATUS_CUSTOMER_ACCEPT_ORDER", "4");
 
+define("PRODUCT_SORT_DATE", "date");
+define("PRODUCT_SORT_PRICE", "price");
+
+define("PRODUCT_SORT_ORDER_ASC", "asc");
+define("PRODUCT_SORT_ORDER_DESC", "desc");
+
+
 ?>
