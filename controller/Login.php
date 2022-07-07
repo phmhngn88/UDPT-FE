@@ -15,7 +15,7 @@ class LoginController
         unset($_SESSION["IsLogined"]);
         unset($_SESSION["UserName"]);
         unset($_SESSION["Token"]);
-        unset($_SESSION["Role"]);
+        unset($_SESSION["role"]);
         
         header("Location:index.php");
         $data = "";
