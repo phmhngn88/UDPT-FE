@@ -6,6 +6,8 @@ require_once("./controller/Register.php");
 require_once ("./controller/Shop.php");
 require_once("./controller/Home.php");
 require_once("config/dbconnect.php");
+require_once("./controller/Product.php");
+require_once("./controller/Customer.php");
 
 $action = "";
 if (isset($_REQUEST["action"])) {
@@ -48,6 +50,10 @@ switch ($action) {
     case "delivering":
         $controller = new ShipperController();
         $controller->DeliveringOrder();
+        break;
+    case "search-product":
+        $controller = new ProductController();
+        $controller->SearchProduct();
         break;
     default:
         $controller = new HomeController();
