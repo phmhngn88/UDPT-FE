@@ -10,5 +10,6 @@ class HomeController
             $role = $_SESSION["role"];
         }
         require("./template/main.phtml");
+
     }
 }
