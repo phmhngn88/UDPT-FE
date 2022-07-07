@@ -44,6 +44,30 @@ switch ($action) {
         $controller = new ShipperController();
         $controller->DeliveringOrder();
         break;
+    case "health-history":
+        $controller = new ShipperController();
+        $controller->HealthHistory();
+        break;
+    case "search-health-history":
+        $controller = new ShipperController();
+        $controller->GetHealthHistory();
+        break;
+    case "add-health-history":
+        $controller = new ShipperController();
+        $controller->AddHealthHistory();
+        break;
+    case "post-health-history":
+        $controller = new ShipperController();
+        $controller->PostHealthHistory();
+        break;
+    case "shipper-update-order-status":
+        $controller = new ShipperController();
+        $controller->UpdateOrderStatus();
+        break;
+    case "get-new-order-by-shipper":
+        $controller = new ShipperController();
+        $controller->GetNewOrderByShipper();
+        break;
 
     default:
         $controller = new HomeController();

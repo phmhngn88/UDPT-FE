@@ -15,12 +15,12 @@ class LoginController
         unset($_SESSION["IsLogined"]);
         unset($_SESSION["UserName"]);
         unset($_SESSION["Token"]);
-        
+        unset($_SESSION["role"]);
         header("Location:index.php");
         $data = "";
+        $role="";
         $VIEW = "./view/Home.phtml";
         require("./template/main.phtml");
-
     }
 
     public function unauthorized_page()
@@ -49,9 +49,7 @@ class LoginController
                 $_SESSION["Token"] = $result->data->token;
                 $_SESSION["role"] = $result->data->role;
                 header("Location:index.php");
-
-            }
-             else {
+            } else {
                 $data = $result->message;
                 $VIEW = "./view/Login.phtml";
             }
