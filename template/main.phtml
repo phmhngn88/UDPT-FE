@@ -38,17 +38,94 @@
     <div id="wrapper">
         <div id="smallbar"></div>
         <div id="content" class="d-flex">
-            <div id="sidebar" >
+            <div id="sidebar">
                 <?php require("include/sidebar.phtml"); ?>
             </div>
 
-            <div id="main" >
+            <div id="main">
                 <?php require($VIEW); ?>
             </div>
 
         </div>
         <div id="footer"></div>
     </div>
+    <input id="main-role" type="hidden" value=<?= $role ?> />
 </body>
+
+<script type="text/javascript">
+    var newOrderByShipperInterval
+    let getNewOrderByShipper = () => {
+        $.ajax({
+            type: "GET",
+            url: `index.php?action=get-new-order-by-shipper`,
+            // dataType: "json",
+            contentType: "json",
+            success: function(response) {
+                if (!response) {
+                    return
+                }
+                let data = JSON.parse(response);
+                if (data.success && data.message === "success") {
+                    if (confirm(`Có đơn hàng mới với giá trị đơn: ${data.data?.total_cost}?. Bạn có muốn nhận đơn này?`)) {
+                        $.ajax({
+                            type: "POST",
+                            url: `index.php?action=shipper-update-order-status`,
+                            data: {
+                                id: data.data._id,
+                                status: "2"
+                            },
+                            success: function(res) {
+                                if (res) {
+
+                                    if (confirm("Cập nhật trạng thái đơn hàng thành công")) {
+
+                                        window.location.replace("index.php?action=delivering")
+                                    } else {
+                                        window.location.replace("index.php?action=delivering")
+
+                                    }
+                                }
+
+                            }
+                        });
+                    } else {
+                        $.ajax({
+                            type: "POST",
+                            url: `index.php?action=shipper-update-order-status`,
+                            data: {
+                                id: data.data._id,
+                                status: "-2"
+                            },
+                            success: function(res) {
+                                if (res) {
+
+                                    if (confirm("Cập nhật trạng thái đơn hàng thành công")) {
+
+                                        window.location.replace("index.php?action=shipping-history")
+                                    } else {
+                                        window.location.replace("index.php?action=shipping-history")
+
+                                    }
+                                }
+
+                            }
+                        });
+                    }
+                }
+
+            }
+        });
+    }
+
+    $(document).ready(function() {
+
+        const role = $("#main-role")[0].value
+        if (role.includes("shipper")) {
+            newOrderByShipperInterval = setInterval(getNewOrderByShipper, 5000)
+        } else {
+            clearInterval(newOrderByShipperInterval)
+        }
+    });
+</script>
 
 </html>
