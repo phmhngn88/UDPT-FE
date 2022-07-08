@@ -133,6 +133,11 @@ switch ($action) {
         $controller = new AdminController();
         $controller->listReview();
         break;
+        
+    case "updateShopStatus":
+        $controller = new AdminController();
+        $controller->updateShopStatus();
+        break;
 
     default:
         $controller = new HomeController();

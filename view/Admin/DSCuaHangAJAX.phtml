@@ -8,6 +8,7 @@
         <th class="border border-x-0 border-slate-600">Số điện thoại</th>
         <th class="border border-x-0 border-slate-600">Hồ sơ đăng kí</th>
         <th class="border border-x-0 border-slate-600">Trạng thái</th>
+        <th class="border border-x-0 border-slate-600">Lựa chọn</th>
       </tr>
     </thead>
     <tbody>
@@ -20,12 +21,24 @@
         echo "<td class='py-3 text-center border border-x-0 border-slate-600'>$item->email</td>";
         echo "<td class='py-3 text-center border border-x-0 border-slate-600'>$item->phone</td>";
         echo "<td class='py-3 text-center border border-x-0 border-slate-600'>$item->business_cert</td>";
-        if($item->isActive == true) {
+        if(isset($item->isActive) && $item->isActive == true) {
           echo "<td class='py-3 text-center border border-x-0 border-slate-600'><span class='text-green-500'>Đã duyệt</span></td>";
+          echo "<td class='py-3 text-center border border-x-0 border-slate-600'>";
+          echo "<button disabled opacity-25 class='px-4 py-2 font-bold rounded text-slate-400 bg-slate-600'>";
+            echo "Duyệt";
+          echo "</button>";
+        echo "</td>";
         } else {
           echo "<td class='py-3 text-center border border-x-0 border-slate-600'><span class='text-red-500'>Chờ xét duyệt</span></td>";
+          echo "<td class='py-3 text-center border border-x-0 border-slate-600'>";
+          echo "<button onclick='updateStatus(\"$item->_id\")' class='px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700'>";
+            echo "Duyệt";
+          echo "</button>";
+        echo "</td>";
         }
+       
         echo "</tr>";
+             
         $stt = $stt + 1;
         }
       ?>
