@@ -54,11 +54,10 @@ class LoginController
                 $data = "thành công";
                 if ($role == "admin") {
                     $role = $result->data->role;
-                    $VIEW = "./view/Admin/Dashboard.html";
-                    require("./template/admin.phtml");
                     header("Location:index.php?action=admin");
+                } else {
+                    header("Location:index.php");
                 }
-                header("Location:index.php");
             } else {
                 $data = $result->message;
                 $role = "";

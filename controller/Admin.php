@@ -115,7 +115,7 @@ class AdminController
         $url = "http://localhost:3000/api/reviews";
         $method = "GET";
 
-        $result = $API->CallAPI($method, $url, $payload);
+        $result = $API->CallAPI($method, $url, null);
         
         return $result;
     }
