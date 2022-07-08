@@ -66,7 +66,7 @@
                 }
                 let data = JSON.parse(response);
                 if (data.success && data.message === "success") {
-                    if (confirm(`Có đơn hàng mới với giá trị đơn: ${data.data?.total_cost}?. Bạn có muốn nhận đơn này?`)) {
+                    if (confirm(`Có đơn hàng mới với giá trị đơn: ${data.data?.total_cost}?. Bạn có muốn nhận đơn này?`) === true) {
                         $.ajax({
                             type: "POST",
                             url: `index.php?action=shipper-update-order-status`,
