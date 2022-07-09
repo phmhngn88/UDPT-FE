@@ -133,7 +133,22 @@ switch ($action) {
         $controller = new AdminController();
         $controller->listReview();
         break;
-
+    case "customer":
+        $controller = new CustomerController();
+        $controller->updateCustomerInfo();
+        break;
+    case "customer-products":
+        $controller = new CustomerController();
+        $controller->searchProduct();
+        break;
+    case "addToCart":
+        $controller = new CustomerController();
+        $controller->addToCart();
+        break;
+    case "cart":
+        $controller = new CustomerController();
+        $controller->cart();
+        break;
     default:
         $controller = new HomeController();
         $controller->index();

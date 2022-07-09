@@ -1,88 +1,22 @@
 <?php
-require_once("constant.php");
-
+if (!empty($data)) {
+    foreach ($data->items as $key=>$value) {
+?>
+<div class="product-item">
+    <form method="post" action="index.php?action=addToCart">
+        <div class="product-image"><img src=""></div>
+        <div class="product-tile-footer">
+            <div class="product-title"><?php echo $value->name; ?></div>
+            <div class="product-price"><?php echo $value->unit_price ."VND"; ?></div>
+            <div class="cart-action">
+                <input type="number" class="product-quantity" name="quantity" value="1" size="2" />
+                <input type="submit" value="Add to Cart" class="btnAddAction" /></div>
+        </div>
+    </form>
+</div>
+<?php
+    }
+}
 ?>
 
-<script type="text/javascript">
-    let search = function(currentPage, currentSize) {
 
-        let page = currentPage ?? 1;
-        let size = currentSize ?? 10;
-        let keyword = $("#keyword")[0].value
-
-
-        let from = $("#search-from-date")[0].value;
-        let to = $("#search-to-date")[0].value;
-
-        $.post({
-            url: `index.php?action=search-product`,
-            data: {
-                page,
-                size,
-                keyword,
-                from,
-                to
-
-            },
-            success: function(response) {
-                $("#result-shipping-history-list").html(response)
-
-            }
-        });
-
-
-    };
-
-    $(document).ready(function() {
-
-        const now = new Date().toISOString().substring(0, 10);
-        // $("#search-from-date")[0].val = now;
-        // $("#search-to-date")[0].val = now;
-        document.getElementById('search-from-date').value = now;
-        document.getElementById('search-to-date').value = now;
-
-        let from = $("#search-from-date")[0].value;
-        let to = $("#search-to-date")[0].value;
-    });
-</script>
-<h1>Tìm kiếm sản phẩm</h1>
-<hr />
-
-<div id="search-advance" class="mt-24">
-
-    <div class="d-flex align-items-start justify-content-space-between">
-        <div class="d-flex justify-content-space-between align-items-space-between flex-column">
-            <label for="keyword">Tên sản phẩm </label> <br />
-
-            <input id="keyword" class="w-275 h-28" type="text" />
-
-        </div>
-        <div class="d-flex justify-content-space-between align-items-space-between flex-column ">
-            <label for="sort">Sắp xếp theo </label> <br />
-            <select name="sort" id="sort" class="h-32">
-                <option value=<?= PRODUCT_SORT_DATE ?>> Ngày đăng</option>
-                <option value=<?= PRODUCT_SORT_PRICE ?>> Giá sản phẩm</option>
-            </select>
-        </div>
-        <div class="d-flex justify-content-space-between align-items-space-between flex-column ">
-            <label for="order">Thứ tự </label> <br />
-            <select name="order" id="order" class="h-32">
-                <option value=<?= PRODUCT_SORT_ORDER_ASC ?>>Tăng dần</option>
-                <option value=<?= PRODUCT_SORT_ORDER_DESC ?>> Giảm dần</option>
-            </select>
-        </div>
-    </div>
-    <div class="mt-24 d-flex ">
-
-
-        <div class="full-width d-flex align-items-end justify-content-end" >
-            <button class="primary h-32" style="width: 300px" onclick="search()">Tìm</button>
-
-        </div>
-
-
-    </div>
-
-</div>
-
-<div id="result-shipping-history-list" class="mt-24" style="overflow: auto"></div>
