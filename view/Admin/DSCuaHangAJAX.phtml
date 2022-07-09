@@ -15,12 +15,13 @@
       <?php 
         $stt = 1;
         foreach($data as $item) {
+          $item->business_cert = $item->business_cert ? $item->business_cert : "https://bizweb.dktcdn.net/100/384/422/files/image-007.jpg?v=1587640188630";
         echo "<tr>";
         echo "<td class='py-3 text-center border border-x-0 border-slate-600'>$stt</td>";
         echo "<td class='py-3 text-center border border-x-0 border-slate-600'>$item->name ? </td>";
         echo "<td class='py-3 text-center border border-x-0 border-slate-600'>$item->email</td>";
         echo "<td class='py-3 text-center border border-x-0 border-slate-600'>$item->phone</td>";
-        echo "<td class='py-3 text-center border border-x-0 border-slate-600'>$item->business_cert</td>";
+        echo "<td class='py-3 text-center border border-x-0 border-slate-600'><a href='$item->business_cert'>$item->business_cert</a></td>";
         if(isset($item->isActive) && $item->isActive == true) {
           echo "<td class='py-3 text-center border border-x-0 border-slate-600'><span class='text-green-500'>Đã duyệt</span></td>";
           echo "<td class='py-3 text-center border border-x-0 border-slate-600'>";
