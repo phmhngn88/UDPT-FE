@@ -4,94 +4,82 @@ require_once('API.php');
 
 class CustomerController
 {
-    public function ViewProfileInfo()
+    public function updateCustomerInfo()
     {
-        $API = new API();
-        $url = "http://localhost:3000/api/customers/getProfileInfo";
-        $method = "GET";
+        $loginController = new LoginController();
+        $loginController -> authentication();
 
-        $result = $API->CallAPI($method, $url, null);
+        if (count($_POST) > 0 && $_SESSION["role"] == "customer") {
+            $API = new API();
+            $url = "http://localhost:3000/api/customers/shipping-info";
+            $method = "POST";
+            $payload = array();
 
-        $data = $result->data;
-        if ($result->message != "success") {
-            $data = null;
+            $phone = $_POST["phone"];
+            $address = $_POST["address"];
+
+            $payload = array(
+                "phone" => $phone, "address" => $address
+            );
+            $result = $API->CallAPI($method, $url, $payload);
+            if ($result->success == true) {
+                $data = "Đang ở trong update Shop";
+                $role = "shop";
+                $VIEW = "./view/Home.phtml";
+            }else{
+                print_r($payload);
+                $data = "Đang ở trong update Shop";
+                $role = "shop";
+                $VIEW = "./view/Customer/CustomerUpdate.phtml";
+            }
+            require("./template/main.phtml");
+
+        }elseif ($_SESSION["role"] == "shop"){
+            $role = $_REQUEST['role'];
+            $data = "Đang ở trong update Shop";
+            $VIEW = "./view/Customer/CustomerUpdate.phtml";
+            require("./template/main.phtml");
+        }else{
+            $data = "Đang ở trong update Shop";
+            $role = "shop";
+            $VIEW = "./view/Customer/CustomerUpdate.phtml";
+            require("./template/main.phtml");
         }
 
-        $VIEW = "view/Customer/Profile_Info.phtml";
-        require("./template/main.phtml");
     }
-    public function SearchShippingHistory()
+
+    public function searchProduct()
     {
-        LoginController::authentication();
-        $page = $_POST["page"];
-        $size = $_POST["size"];
-        $order_id = $_POST["order_id"];
-        $status = $_POST["status"];
-        $from = $_POST["from"];
-        $to = $_POST["to"];
+        $loginController = new LoginController();
+        $loginController -> authentication();
 
         $API = new API();
-        $url = "http://localhost:3000/api/orders/getAllByShipper";
-        $method = "POST";
+        $url = "http://localhost:3000/api/products/search";
+        $method = "GET";
+        $payload = array();
+
+        $page = 1;
+        $size = 10;
+        $keyword = "";
         $payload = array(
-            "page" => $page,
-            "size" => $size,
-            "order_id" => $order_id,
-            "status" => $status,
-            "from" => $from,
-            "to" => $to
+            "page" => $page, "size" => $size, "keyword" => $keyword
         );
-
         $result = $API->CallAPI($method, $url, $payload);
-        $data = new PagingRes();
-
-        if ($result->message == "success") {
-            $data->data = $result->data->items;
-            $data->total = $result->data->total_items;
-            $data->page = $page;
-        }
-
-        $VIEW = "view/Shipper/ShippingHistoryAJAX.phtml";
-        require($VIEW);
-    }
-
-    public function ShippingOrderDetail()
-    {
-        LoginController::authentication();
-        $id = $_REQUEST["id"];
-
-
-        $API = new API();
-        $url = "http://localhost:3000/api/orders/getDetailByShipper?id=$id";
-        $method = "GET";
-
-        $result = $API->CallAPI($method, $url, null);
-
         $data = $result->data;
-        if ($result->message != "success") {
-            $data = null;
-        }
 
-        $VIEW = "view/Shipper/Shipper_OrderDetail.phtml";
+        $VIEW = "./view/Product/SearchProduct.phtml";
         require("./template/main.phtml");
     }
 
-    public function DeliveringOrder()
+    public function addToCart()
     {
-        LoginController::authentication();
 
-        $API = new API();
-        $url = "http://localhost:3000/api/orders/getDeliveringOrderByShipper";
-        $method = "GET";
+    }
 
-        $result = $API->CallAPI($method, $url, null);
-
-        $data = $result->data;
-        if ($result->message != "success") {
-            $data = null;
-        }
-
-        $VIEW = "view/Shipper/Shipper_OrderDetail.phtml";
+    public function cart()
+    {
+        $VIEW = "./view/Customer/Cart.phtml";
         require("./template/main.phtml");
     }
+
 }

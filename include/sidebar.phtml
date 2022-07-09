@@ -38,10 +38,32 @@
                     <a href="index.php?action=AllProductByShop"><br>Các sản phẩm của shop<br/></a>
                 </li>
                 <li>
-                    <a href="index.php"><br>Tìm kiếm hóa đơn<br/></a>
+                    <a href="index.php"><br>Danh sách hóa đơn<br/></a>
                 </li>
                 <li>
                     <a href="index.php"><br>Cập nhật trạng thái hóa đơn<br/></a>
+                </li>
+            </ul>
+
+        </div>
+    <?php endif ?>
+
+    <?php if (isset($_SESSION["IsLogined"]) && $_SESSION["IsLogined"] == True && $_SESSION["role"] == "customer"): ?>
+        <div class="menu">
+            <ul>
+                <li>
+                    <a href="index.php"><br>Trang chủ<br/></a>
+                </li>
+                <li>
+                    <a href="index.php?action=customer"><br>Thông tin cá nhân<br/></a>
+                </li>
+                <li>
+                    <a href="index.php?action=customer-products"><br>Sản phẩm<br/></a>
+                </li>
+                <li>
+                <li>
+                    <a href="index.php?action=cart"><br>Giỏ hàng<br/></a>
+                </li>
                 </li>
             </ul>
 
