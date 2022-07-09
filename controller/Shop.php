@@ -108,13 +108,13 @@ class ShopController
         $loginController -> authentication();
         if (count($_POST) > 0 && $_SESSION["role"] == "shop") {
             $API = new API();
-            $url = "http://localhost:3000/api/shops/insertProduct";
+            $url = "http://localhost:3000/api/shops/updateProduct";
             $method = "POST";
             $payload = array();
 
 
             $name = $_POST["name"];
-            $id = @$_GET["id"];
+            $id = $_GET["id"];
 
             $description = $_POST["description"];
             $inventory = $_POST["inventory"];
@@ -125,7 +125,7 @@ class ShopController
 
             $payload = array(
                 "name" => $name, "description" => $description,
-                "$inventory" => $inventory, "unit_price" => $unit_price,
+                "inventory" => $inventory, "unit_price" => $unit_price,
                 "unit" => $unit, "product_type" => $product_type, "product_id" => $id
             );
             print_r($payload);
@@ -156,8 +156,64 @@ class ShopController
     {
         $loginController = new LoginController();
         $loginController -> authentication();
-        $VIEW = "./view/shop/AllProductByShop.phtml";
+        $VIEW = "./view/shop/ListProduct.phtml";
         $role="";
         require("./template/main.phtml");
+    }
+
+    public function listProduct() {
+        $limit = $_POST["limit"];
+        $offset = $_POST["offset"];
+
+
+        $payload = array(
+            "limit" => $limit,
+            "offset" => $offset,
+        );
+
+        $getData = $this->getProduct($payload);
+        $data = $getData->data->products;
+        $total = $getData->data->productCount;
+        $currentPage = ($offset + $limit) / $limit;
+
+        $VIEW = "./view/Shop/ListProductAjax.phtml";
+        require($VIEW);
+    }
+
+    private function getProduct($payload) {
+        $API = new API();
+        $url = "http://localhost:3000/api/products/getProductByShop";
+        $method = "GET";
+
+        $result = $API->CallAPI($method, $url, $payload);
+
+        return $result;
+    }
+
+    public function UpdateOrderStatus()
+    {
+        $loginController = new LoginController();
+        $loginController -> authentication();
+        $id = $_POST["id"];
+        $status = $_POST["status"];
+
+        $API = new API();
+        $url = "http://localhost:3000/api/orders/update-status";
+        $method = "POST";
+
+        $payload = array(
+            "order_id" => $id,
+            "status" => $status
+        );
+
+        $result = $API->CallAPI($method, $url, $payload);
+        $data = $result->message;
+
+        if ($result->message == "success") {
+            header("Location:index.php?action=shipping-history");
+        }
+
+
+        echo $result->success;
     }
 }

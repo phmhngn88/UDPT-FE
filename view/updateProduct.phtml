@@ -1,3 +1,12 @@
+<?php
+$API = new API();
+$id = $_GET["id"];
+$url = "http://localhost:3000/api/products/get?id=$id";
+$method = "GET";
+$payload = array();
+$result = $API->CallAPI($method, $url, $payload);
+$data = $result->data
+?>
 <h1>Cập Nhật Sản Phẩm</h1>
 <hr />
 <div>
@@ -5,32 +14,38 @@
     </a>
 </div>
 <br />
-<form action="index.php?action=updateProduct&role=shop" method="post" class="mt-24">
+<form action='index.php?action=updateProduct&role=shop&id=<?php echo $id?>' method="post" class="mt-24">
     <div class="d-flex align-items-start">
-        <span style="display:inline-block; width:200px">Tên sản phầm: </span> <input name="name" type="text" />
-    </div>
-    <br />
-    <br />
-    <div class="d-flex align-items-start">
-        <span style="display:inline-block; width:200px">Mô tả: </span> <textarea name="description"></textarea>
+        <span style="display:inline-block; width:200px">Tên sản phầm: </span> <input name="name" type="text" value="<?php echo $data->name ?>"/>
     </div>
     <br />
     <div class="d-flex align-items-start">
-        <span style="display:inline-block; width:200px">Số lượng: </span> <textarea name="inventory"></textarea>
+        <span style="display:inline-block; width:200px">Mô tả: </span> <textarea name="description" ><?php echo $data->description ?></textarea>
     </div>
     <br />
     <div class="d-flex align-items-start">
-        <span style="display:inline-block; width:200px">Gia tiền: </span> <input name="unit_price" type="text" />
+        <span style="display:inline-block; width:200px">Số lượng: </span> <textarea name="inventory"><?php echo $data->inventory ?></textarea>
     </div>
     <br />
     <div class="d-flex align-items-start">
-        <span style="display:inline-block; width:200px">Đơn vị: </span> <input name="unit" type="text" />
+        <span style="display:inline-block; width:200px">Giá tiền: </span> <input name="unit_price" type="text" value="<?php echo $data->unit_price ?>"/>
+    </div>
+    <br />
+    <div class="d-flex align-items-start">
+        <span style="display:inline-block; width:200px">Đơn vị: </span> <input name="unit" type="text" value="<?php echo $data->unit ?>"/>
     </div>
     <br />
     <div class="d-flex align-items-start">
         <label  for="product_type">Loại sản phẩm</label>
         <select name="product_type">
-            <option value=''>-----SELECT-----</option>
+            <?php
+            $API = new API();
+            $url = "http://localhost:3000/api/productCategory/get/$data->product_type";
+            $method = "GET";
+            $payload = array();
+            $curProductType = $API->CallAPI($method, $url, $payload);
+            ?>
+            <option value="<?php echo $data->product_type ?>"><?php echo $curProductType->data->name ?></option>
             <?php
             $API = new API();
             $url = "http://localhost:3000/api/productCategories/getAll";
