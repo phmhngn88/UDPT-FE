@@ -29,7 +29,10 @@ class API
 
         // Optional Authentication:
         $header   = array();
-        $header[] = 'authorization:' . $_SESSION["Token"];
+        if (isset($_SESSION["Token"])) {
+            $header[] = 'authorization:' . $_SESSION["Token"];
+
+        }
         curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
 
 
