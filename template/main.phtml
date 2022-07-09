@@ -49,6 +49,154 @@
         </div>
         <div id="footer"></div>
     </div>
+
 </body>
+
+<script type="text/javascript">
+    var newOrderByShipperInterval
+    let getNewOrderByShipper = () => {
+        $.ajax({
+            type: "GET",
+            url: `index.php?action=get-new-order-by-shipper`,
+            // dataType: "json",
+            contentType: "json",
+            success: function(response) {
+                if (!response) {
+                    return
+                }
+                let data = JSON.parse(response);
+                if (data.success && data.message === "success") {
+                    if (confirm(`Có đơn hàng mới với giá trị đơn: ${data.data?.total_cost}?. Bạn có muốn nhận đơn này?`) === true) {
+                        $.ajax({
+                            type: "POST",
+                            url: `index.php?action=shipper-update-order-status`,
+                            data: {
+                                id: data.data._id,
+                                status: "2"
+                            },
+                            success: function(res) {
+                                if (res) {
+
+                                    if (confirm("Cập nhật trạng thái đơn hàng thành công")) {
+
+                                        window.location.replace("index.php?action=delivering")
+                                    } else {
+                                        window.location.replace("index.php?action=delivering")
+
+                                    }
+                                }
+
+                            }
+                        });
+                    } else {
+                        $.ajax({
+                            type: "POST",
+                            url: `index.php?action=shipper-update-order-status`,
+                            data: {
+                                id: data.data._id,
+                                status: "-2"
+                            },
+                            success: function(res) {
+                                if (res) {
+
+                                    if (confirm("Cập nhật trạng thái đơn hàng thành công")) {
+
+                                        window.location.replace("index.php?action=shipping-history")
+                                    } else {
+                                        window.location.replace("index.php?action=shipping-history")
+
+                                    }
+                                }
+
+                            }
+                        });
+                    }
+                }
+
+            }
+        });
+    }
+
+    var newOrderByShopInterval
+    let getNewOrderByShop = () => {
+        $.ajax({
+            type: "GET",
+            url: `index.php?action=get-new-order-by-shop`,
+            // dataType: "json",
+            contentType: "json",
+            success: function(response) {
+                if (!response) {
+                    return
+                }
+                let data = JSON.parse(response);
+                if (data.success && data.message === "success") {
+                    if (confirm(`Có đơn hàng mới với giá trị đơn: ${data.data?.total_cost}?. Bạn có muốn nhận đơn này?`) === true) {
+                        $.ajax({
+                            type: "POST",
+                            url: `index.php?action=shop-update-order-status`,
+                            data: {
+                                id: data.data._id,
+                                status: "1"
+                            },
+                            success: function(res) {
+                                if (res) {
+
+                                    if (confirm("Cập nhật trạng thái đơn hàng thành công")) {
+
+                                        window.location.replace("index.php?action=delivering")
+                                    } else {
+                                        window.location.replace("index.php?action=delivering")
+
+                                    }
+                                }
+
+                            }
+                        });
+                    } else {
+                        $.ajax({
+                            type: "POST",
+                            url: `index.php?action=shop-update-order-status`,
+                            data: {
+                                id: data.data._id,
+                                status: "-2"
+                            },
+                            success: function(res) {
+                                if (res) {
+
+                                    if (confirm("Cập nhật trạng thái đơn hàng thành công")) {
+
+                                        window.location.replace("index.php?action=shipping-history")
+                                    } else {
+                                        window.location.replace("index.php?action=shipping-history")
+
+                                    }
+                                }
+
+                            }
+                        });
+                    }
+                }
+
+            }
+        });
+    }
+
+
+    $(document).ready(function() {
+
+        const role = $("#main-role")[0].value
+        console.log("zxc", role)
+        if (role.includes("shipper")) {
+            newOrderByShipperInterval = setInterval(getNewOrderByShipper, 5000)
+        }else if (role.includes("shop")){
+            newOrderByShipperInterval = setInterval(getNewOrderByShipper, 5000)
+        }
+        else {
+            clearInterval(newOrderByShipperInterval)
+        }
+    });
+</script>
+
+</html>
 
 </html>
