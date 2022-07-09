@@ -4,128 +4,209 @@ require_once("constant.php");
 ?>
 
 <script type="text/javascript">
+    let updateStatus = (id, status) => {
+        switch (status) {
+            case "3":
+                if (confirm("Hoàn tất đơn hàng ?")) {
+                    $.post({
+                        url: `index.php?action=shipper-update-order-status`,
+                        data: {
+                            id,
+                            status
+
+                        },
+                        success: (res) => {
+                            if (res) {
+
+                                if (confirm("Cập nhật trạng thái đơn hàng thành công")) {
+
+                                    window.location.replace("index.php?action=shipping-history")
+                                } else {
+                                    window.location.replace("index.php?action=shipping-history")
+
+                                }
+                            }
+                        }
+                    });
+                }
+                break;
+            case "-3":
+                if (confirm("Giao hàng thất bại ?")) {
+                    $.post({
+                        url: `index.php?action=shipper-update-order-status`,
+                        data: {
+                            id,
+                            status
+
+                        },
+                        success: (res) => {
+                            if (res) {
+
+                                if (confirm("Cập nhật trạng thái đơn hàng thành công")) {
+
+                                    window.location.replace("index.php?action=shipping-history")
+                                } else {
+                                    window.location.replace("index.php?action=shipping-history")
+
+                                }
+                            }
+                        }
+                    });
+                }
+                break;
+            default:
+                break;
+        }
+
+
+    }
 </script>
 <h1>Chi tiết đơn hàng</h1>
 <hr />
+<?php if ($data == null && $_REQUEST["action"] != "delivering") : ?>
+    <div class="mt-24">Không tồn tại đơn hàng</div>
+<?php elseif ($data == null && $_REQUEST["action"] == "delivering") : ?>
+    <div class="mt-24">Không có đơn đang giao</div>
+<?php elseif ($data != null) : ?>
 
-<div id="search-advance" class="mt-24">
+    <div id="search-advance" class="mt-24">
 
-    <div class="general-info d-flex justify-content-space-between">
+        <div class="general-info d-flex justify-content-space-between">
 
-        <div class="d-flex flex-column">
-            <div class="d-flex justify-content-space-between align-items-space-between flex-column">
-                <label for="search-order-id"><b>ID đơn hàng</b> </label> <br />
+            <div class="d-flex flex-column">
+                <div class="d-flex justify-content-space-between align-items-space-between flex-column">
+                    <label for="search-order-id"><b>ID đơn hàng</b> </label> <br />
 
-                <div class="d-flex align-items-center"><?= $data->_id ?></div>
+                    <div class="d-flex align-items-center" style="height: 35px;"><?= $data->_id ?></div>
 
-            </div>
-            <br />
-            <div class="d-flex justify-content-space-between align-items-space-between flex-column">
-                <label for="search-order-id"><b>Tên khách</b> </label> <br />
-
-                <div class="d-flex align-items-center"><?= $data->customer_info->full_name ?></div>
-
-            </div>
-            <br />
-            <div class="d-flex justify-content-space-between align-items-space-between flex-column">
-                <label for="search-order-id"><b>Tổng sản phẩm</b> </label> <br />
-
-                <div class="d-flex align-items-center"><?= $data->total_product ?></div>
-
-            </div>
-
-        </div>
-        <div class="d-flex  flex-column">
-            <div class="d-flex justify-content-space-between align-items-space-between flex-column ">
-                <label for="search-from-date"><b>Ngày</b> </label>
+                </div>
                 <br />
+                <div class="d-flex justify-content-space-between align-items-space-between flex-column">
+                    <label for="search-order-id"><b>Tên khách</b> </label> <br />
 
-                <div class="d-flex align-items-center"><?= $data->created_at ?></div>
+                    <div class="d-flex align-items-center"><?= $data->customer_info->full_name ?></div>
 
-            </div>
-            <br />
-            <div class="d-flex justify-content-space-between align-items-space-between flex-column ">
-                <label for="search-from-date"><b>Địa chỉ giao hàng</b> </label>
+                </div>
                 <br />
+                <div class="d-flex justify-content-space-between align-items-space-between flex-column">
+                    <label for="search-order-id"><b>Tổng sản phẩm</b> </label> <br />
 
-                <div class="d-flex align-items-center"><?= $data->customer_info->address ?></div>
+                    <div class="d-flex align-items-center"><?= $data->total_product ?></div>
 
-            </div>
-            <br />
-            <div class="d-flex justify-content-space-between align-items-space-between flex-column">
-                <label for="search-order-id"><b>Tổng tiền</b> </label> <br />
-
-                <div class="d-flex align-items-center"><?= $data->total_cost ?></div>
+                </div>
 
             </div>
+            <div class="d-flex  flex-column">
+                <div class="d-flex justify-content-space-between align-items-space-between flex-column ">
+                    <label for="search-from-date"><b>Ngày</b> </label>
+                    <br />
+
+                    <div class="d-flex align-items-center" style="height: 35px;"><?= $data->created_at ?></div>
+
+                </div>
+                <br />
+                <div class="d-flex justify-content-space-between align-items-space-between flex-column ">
+                    <label for="search-from-date"><b>Địa chỉ giao hàng</b> </label>
+                    <br />
+
+                    <div class="d-flex align-items-center"><?= $data->customer_info->address ?></div>
+
+                </div>
+                <br />
+                <div class="d-flex justify-content-space-between align-items-space-between flex-column">
+                    <label for="search-order-id"><b>Tổng tiền</b> </label> <br />
+
+                    <div class="d-flex align-items-center"><?= $data->total_cost ?></div>
+
+                </div>
+
+            </div>
+            <div class="d-flex  flex-column">
+
+                <div class="d-flex justify-content-space-between align-items-space-between flex-column ">
+                    <label for="search-to-date"><b>Trạng thái</b> </label> <br />
+                    <?= $data->status == ORDER_STATUS_SHIP_SUCCESS ?
+                        "<span class='d-flex justify-center' style='width: 100px; border-radius: 8px; padding: 8px; background: #2cb104; color: white;'>Thành công</span>"
+                        : ($data->status == ORDER_STATUS_SHIPPER_ACCEPT_ORDER ? "<span class='d-flex justify-center' style='width: 100px; border-radius: 8px; padding: 8px; background: #4b71cf; color: white;'>Đang giao</span>" :  "<span class='d-flex justify-center' style='width: 100px; border-radius: 8px; padding: 8px; background: #ff6464; color: white;'>Thất bại</span>") ?>
+
+                </div>
+                <br />
+                <div class="d-flex justify-content-space-between align-items-space-between flex-column ">
+                    <label for="search-to-date"><b>Số điện thoại</b> </label> <br />
+                    <div class="d-flex align-items-center"><?= $data->customer_info->phone ?></div>
+                </div>
+                <br />
+                <?php if ($data->status == ORDER_STATUS_SHIPPER_ACCEPT_ORDER) :  ?>
+                    <div class="d-flex justify-content-space-between align-items-space-between flex-column">
+                        <label for="search-order-id"><b>Thao tác</b> </label> <br />
+
+                        <div class="d-flex">
+
+                            <span>
+                                <button type="default" class="danger" onclick="updateStatus( `<?php echo $data->_id ?>`, `-3`)">Giao thất bại</button>
+                            </span>
+                            <span class="ml-8">
+                                <button type="default" onclick="updateStatus( `<?php echo $data->_id ?>`, '3')" class="success">Hoàn tất đơn</button>
+
+                            </span>
+                        </div>
+
+                    </div>
+                <?php endif ?>
+            </div>
+
         </div>
-        <div class="d-flex  flex-column">
-
-            <div class="d-flex justify-content-space-between align-items-space-between flex-column ">
-                <label for="search-to-date"><b>Trạng thái</b> </label> <br />
-                <?= $data->status == ORDER_STATUS_SHIP_SUCCESS ?
-                    "<span class='d-flex justify-center' style='border-radius: 8px; padding: 8px; background: #2cb104; color: white;'>Thành công</span>"
-                    : ($data->status == ORDER_STATUS_SHIPPER_ACCEPT_ORDER ? "<span class='d-flex justify-center' style='border-radius: 8px; padding: 8px; background: #4b71cf; color: white;'>Đang giao</span>" :  "<span class='d-flex justify-center' style='border-radius: 8px; padding: 8px; background: #ff6464; color: white;'>Thất bại</span>") ?>
-
-            </div>
-            <br />
-            <div class="d-flex justify-content-space-between align-items-space-between flex-column ">
-                <label for="search-to-date"><b>Số điện thoại</b> </label> <br />
-                <div class="d-flex align-items-center"><?= $data->customer_info->phone ?></div>
-            </div>
-        </div>
-
-    </div>
-    <table class="custom-table mt-24">
-        <tr style="height: 40px">
-
-            <th style="width: 250px">
-                Tên sản phẩm
-            </th>
-            <th style="width: 250px">
-                Mô tả
-            </th>
-            <th style="text-align: center;width: 150px">
-                Giá
-            </th>
-            <th style="text-align: center;width: 150px">
-                Số lượng
-            </th>
-            <th style="text-align: center;width: 150px">
-                Thành tiền
-            </th>
-
-        </tr>
-
-
-        <?php
-
-
-        foreach ($data->products as $key => $item) {
-        ?>
-
-
+        <table class="custom-table mt-24">
             <tr style="height: 40px">
 
-                <td>
-                    <?= $item->name ?>
-                </td>
-                <td>
-                    <?= $item->description ?>
-                </td>
-                <td style="text-align: center;">
-                    <?= $item->unit_price ?>
-                </td>
-                <td style="text-align: center;">
-                    <?= $item->quantity ?>
-                </td>
-                <td style="text-align: center;">
-                    <?= $item->quantity *  $item->unit_price?>
-                </td>
+                <th style="width: 250px">
+                    Tên sản phẩm
+                </th>
+                <th style="width: 250px">
+                    Mô tả
+                </th>
+                <th style="text-align: center;width: 150px">
+                    Giá
+                </th>
+                <th style="text-align: center;width: 150px">
+                    Số lượng
+                </th>
+                <th style="text-align: center;width: 150px">
+                    Thành tiền
+                </th>
+
             </tr>
 
-        <?php
-        }
-        ?>
-    </table>
-</div>
+
+            <?php
+
+
+            foreach ($data->products as $key => $item) {
+            ?>
+
+
+                <tr style="height: 40px">
+
+                    <td>
+                        <?= $item->name ?>
+                    </td>
+                    <td>
+                        <?= $item->description ?>
+                    </td>
+                    <td style="text-align: center;">
+                        <?= $item->unit_price ?>
+                    </td>
+                    <td style="text-align: center;">
+                        <?= $item->quantity ?>
+                    </td>
+                    <td style="text-align: center;">
+                        <?= $item->quantity *  $item->unit_price ?>
+                    </td>
+                </tr>
+
+            <?php
+            }
+            ?>
+        </table>
+    </div>
+<?php endif ?>

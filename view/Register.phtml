@@ -33,48 +33,71 @@
             </a>
         </div>
         <br />
-        <form action="index.php?action=register&role=shipper" method="post">
-            <div>
-                <span style="display:inline-block; width:200px">Tên đăng nhập:</span> <input name="UserName" type="text" />
+        <form action="index.php?action=register&role=shipper" method="post" class="px-100">
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Tên đăng nhập:</span> <span> <input style="width: 500px;" name="UserName" type="text" />
+                </span>
+            </div>
+            <br />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Mật khẩu: </span> <span>
+                    <input style="width: 500px;" name="Password" type="password" />
 
+                </span>
             </div>
             <br />
-            <div>
-                <span style="display:inline-block; width:200px">Mật khẩu: </span> <input name="Password" type="password" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Số điện thoại: </span> <span>
+                    <input style="width: 500px;" name="phone" type="text" />
 
+                </span>
             </div>
             <br />
-            <div>
-                <span style="display:inline-block; width:200px">Số điện thoại: </span> <input name="phone" type="text" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Email: </span> <span>
+                    <input style="width: 500px;" name="email" type="email" />
+
+                </span>
             </div>
             <br />
-            <div>
-                <span style="display:inline-block; width:200px">Email: </span> <input name="email" type="email" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Họ tên: </span> <span>
+                    <input style="width: 500px;" name="full_name" type="text" />
+
+                </span>
             </div>
             <br />
-            <div>
-                <span style="display:inline-block; width:200px">Họ tên: </span> <input name="full_name" type="text" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Địa chỉ: </span> <span>
+                    <input style="width: 500px;" name="address" type="text" />
+
+                </span>
             </div>
             <br />
-            <div>
-                <span style="display:inline-block; width:200px">Địa chỉ: </span> <input name="address" type="text" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">CMND/CCCD: </span> <span>
+                    <input style="width: 500px;" name="identity" type="text" />
+
+                </span>
             </div>
             <br />
-            <div>
-                <span style="display:inline-block; width:200px">CMND/CCCD: </span> <input name="identity" type="text" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Số tài khoản ngân hàng: </span> <span>
+                    <input style="width: 500px;" name="bank_account" type="text" />
+
+                </span>
             </div>
             <br />
-            <div>
-                <span style="display:inline-block; width:200px">Số tài khoản ngân hàng: </span> <input name="bank_account" type="text" />
-            </div>
-            <br />
-            <div>
-                <span style="display:inline-block; width:200px">Khu vực hoạt động: </span> <input name="work_zone" type="text" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Khu vực hoạt động: </span> <span>
+                    <input style="width: 500px;" name="work_zone" type="text" />
+
+                    <span></span> </span>
             </div>
             <br />
             <div><b style="color: red"><?= $data ?></b></div>
             <br />
-            <input type="hidden" value=<?= $role ?> />
+            <input style="width: 500px;" type="hidden" value=<?= $role ?> />
             <button class="primary full-width" type="submit">Đăng ký</button>
         </form>
     <?php elseif ($role == "customer") : ?>
@@ -83,45 +106,75 @@
             </a>
         </div>
         <br />
-    
-        <form action="index.php?action=register&role=customer" method="post">
-            <div>
-                <span style="display:inline-block; width:200px">Tên đăng nhập:</span> <input name="UserName" type="text" />
 
-            </div>
-            <br />
-            <div>
-                <span style="display:inline-block; width:200px">Mật khẩu: </span> <input name="Password" type="password" />
+        <form action="index.php?action=register&role=customer" method="post" class="px-100">
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Tên đăng nhập:</span>
+                <span>
+                    <input style="width: 500px;" name="UserName" type="text" />
 
+                </span>
             </div>
             <br />
-            <div>
-                <span style="display:inline-block; width:200px">Số điện thoại: </span> <input name="phone" type="text" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Mật khẩu: </span>
+                <span>
+                    <input style="width: 500px;" name="Password" type="password" />
+
+                </span>
             </div>
             <br />
-            <div>
-                <span style="display:inline-block; width:200px">Email: </span> <input name="email" type="email" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Số điện thoại: </span>
+                <span>
+                    <input style="width: 500px;" name="phone" type="text" />
+
+                </span>
             </div>
             <br />
-            <div>
-                <span style="display:inline-block; width:200px">Họ tên: </span> <input name="full_name" type="text" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Email: </span>
+                <span>
+                    <input style="width: 500px;" name="email" type="email" />
+
+                </span>
             </div>
             <br />
-            <div>
-                <span style="display:inline-block; width:200px">Địa chỉ: </span> <input name="address" type="text" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Họ tên: </span>
+                <span>
+                    <input style="width: 500px;" name="full_name" type="text" />
+
+                </span>
             </div>
             <br />
-            <div>
-                <span style="display:inline-block; width:200px">CMND/CCCD: </span> <input name="identity" type="text" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Địa chỉ: </span>
+                <span>
+                    <input style="width: 500px;" name="address" type="text" />
+
+                </span>
             </div>
             <br />
-            <div>
-                <span style="display:inline-block; width:200px">Số tài khoản ngân hàng: </span> <input name="bank_account" type="text" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">CMND/CCCD: </span>
+                <span>
+                    <input style="width: 500px;" name="identity" type="text" />
+
+                </span>
+            </div>
+            <br />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Số tài khoản ngân hàng: </span>
+                <span>
+                    <input style="width: 500px;" name="bank_account" type="text" />
+
+                </span>
             </div>
 
             <div><b style="color: red"><?= $data ?></b></div>
             <br />
-            <input type="hidden" value=<?= $role ?> />
+            <input style="width: 500px;" type="hidden" value=<?= $role ?> />
             <button class="primary full-width" type="submit">Đăng ký</button>
         </form>
     <?php elseif ($role == "shop") : ?>
@@ -130,46 +183,70 @@
             </a>
         </div>
         <br />
-        <form action="index.php?action=register&role=shop" method="post" class="mt-24">
-            <div class="d-flex align-items-start">
-                <span style="display:inline-block; width:200px">Tên đăng nhập:</span> <input name="UserName" type="text" />
+        <form action="index.php?action=register&role=shop" method="post" class="mt-24 px-100">
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Tên đăng nhập:</span>
+                <span>
+                    <input style="width: 500px;" name="UserName" type="text" />
+                </span>
 
             </div>
             <br />
-            <div class="d-flex align-items-start">
-                <span style="display:inline-block; width:200px">Mật khẩu: </span> <input name="Password" type="password" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Mật khẩu: </span>
+                <span>
+                    <input style="width: 500px;" name="Password" type="password" />
+                </span>
 
             </div>
             <br />
-            <div class="d-flex align-items-start">
-                <span style="display:inline-block; width:200px">Số điện thoại: </span> <input name="phone" type="text" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Số điện thoại: </span>
+                <span>
+                    <input style="width: 500px;" name="phone" type="text" />
+                </span>
             </div>
             <br />
 
-            <div class="d-flex align-items-start">
-                <span style="display:inline-block; width:200px">Email: </span> <input name="email" type="email" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Email: </span>
+                <span>
+                    <input style="width: 500px;" name="email" type="email" />
+                </span>
             </div>
             <br />
-            <div class="d-flex align-items-start">
-                <span style="display:inline-block; width:200px">Tên cửa hàng: </span> <input name="name" type="text" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Tên cửa hàng: </span>
+                <span>
+                    <input style="width: 500px;" name="name" type="text" />
+                </span>
             </div>
             <br />
 
-            <div class="d-flex align-items-start">
-                <span style="display:inline-block; width:200px">Địa chỉ: </span> <input name="location" type="text" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Địa chỉ: </span>
+                <span>
+                    <input style="width: 500px;" name="location" type="text" />
+                </span>
             </div>
             <br />
-            <div class="d-flex align-items-start">
-                <span style="display:inline-block; width:200px">Mô tả: </span> <textarea name="description"></textarea>
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Mô tả: </span>
+                <span>
+                    <textarea style="width: 500px" name="description"></textarea>
+                </span>
             </div>
             <br />
-            <div class="d-flex align-items-start">
-                <span style="display:inline-block; width:200px">Số tài khoản ngân hàng: </span> <input name="bank_account" type="text" />
+            <div class="d-flex justify-content-space-between">
+                <span style="display:inline-block; width:200px">Số tài khoản ngân hàng: </span>
+                <span>
+                    <input style="width: 500px;" name="bank_account" type="text" />
+                </span>
             </div>
             <br />
             <div><b style="color: red"><?= $data ?></b></div>
             <br />
-            <input type="hidden" value=<?= $role ?> />
+            <input style="width: 500px;" type="hidden" value=<?= $role ?> />
             <button class="primary full-width" type="submit">Đăng ký</button>
         </form>
     <?php endif; ?>

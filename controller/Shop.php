@@ -93,6 +93,7 @@ class ShopController
 
         }elseif ($_SESSION["role"] == "shop"){
             $VIEW = "./view/addProduct.phtml";
+            $role="shop";
             require("./template/main.phtml");
         }else{
             $role = "shop";
@@ -156,6 +157,7 @@ class ShopController
         $loginController = new LoginController();
         $loginController -> authentication();
         $VIEW = "./view/shop/ListProduct.phtml";
+        $role="";
         require("./template/main.phtml");
     }
 

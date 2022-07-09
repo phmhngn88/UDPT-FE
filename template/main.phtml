@@ -38,18 +38,18 @@
     <div id="wrapper">
         <div id="smallbar"></div>
         <div id="content" class="d-flex">
-            <div id="sidebar" >
+            <div id="sidebar">
                 <?php require("include/sidebar.phtml"); ?>
             </div>
 
-            <div id="main" >
+            <div id="main">
                 <?php require($VIEW); ?>
             </div>
 
         </div>
         <div id="footer"></div>
     </div>
-
+    <input id="main-role" type="hidden" value=<?= $role ?> />
 </body>
 
 <script type="text/javascript">
@@ -193,10 +193,8 @@
         }
         else {
             clearInterval(newOrderByShipperInterval)
+            clearInterval(newOrderByShopInterval)
         }
     });
 </script>
-
-</html>
-
 </html>
