@@ -1,0 +1,51 @@
+<table class="w-full table-auto">
+    <thead>
+    <tr>
+        <th class="border border-x-0 border-slate-600">STT</th>
+        <th class="border border-x-0 border-slate-600">Tên sản phẩm</th>
+        <th class="border border-x-0 border-slate-600">Tồn kho</th>
+        <th class="border border-x-0 border-slate-600">Mô tả</th>
+        <th class="border border-x-0 border-slate-600">Giá tiền</th>
+        <th class="border border-x-0 border-slate-600">Đơn vị</th>
+        <th class="border border-x-0 border-slate-600">Cập nhật sản phẩm</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    $stt = 1;
+    foreach($data as $item) {
+        echo "<tr>";
+        echo "<td class='py-3 text-center border border-x-0 border-slate-600'>$stt</td>";
+        echo "<td class='py-3 text-center border border-x-0 border-slate-600'>$item->name
+                    <a  target='_blank' href='index.php?action=shipping-order-detail&id=<?=$item->_id ?>' class='decoration-none' class='border border-x-0 border-slate-600'> 
+                    <?= $item->_id ?>
+              </a>
+              </td>";
+        echo "<td class='py-3 text-center border border-x-0 border-slate-600'>$item->inventory</td>";
+        echo "<td class='py-3 text-center border border-x-0 border-slate-600'>$item->description</td>";
+        echo "<td class='py-3 text-center border border-x-0 border-slate-600'>$item->unit_price</td>";
+        echo "<td class='py-3 text-center border border-x-0 border-slate-600'>$item->unit</td>";
+        echo "<td class='py-3 text-center border border-x-0 border-slate-600'>
+               <a  href='index.php?action=updateProduct&id=$item->_id' class='decoration-none'> 
+                    <?= $item->_id ?>
+                    <div>Edit</div>
+              </a>
+               </td>";
+        $stt = $stt + 1;
+    }
+    ?>
+    </tbody>
+</table>
+<div class="mb-5 paging">
+    <div class="mx-24 current-page">
+        Trang hiện tại: <?= $currentPage ?></span>
+    </div>
+    <?php
+
+    for ($i = 1; $i <= ceil($total / (10 * 1.0)); $i++) {
+        ?>
+        <span class="pointer paging-item" onclick="get(<?= $i ?>)"><?= $i ?></span>
+        <?php
+    }
+    ?>

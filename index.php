@@ -49,6 +49,22 @@ switch ($action) {
         $controller = new ShopController();
         $controller->AllProductByShop();
         break;
+    case "listProduct":
+        $controller = new ShopController();
+        $controller->listProduct();
+        break;
+    case "shop-update-order-status":
+        $controller = new ShopController();
+        $controller->UpdateOrderStatus();
+        break;
+    case "get-new-order-by-shop":
+        $controller = new ShopController();
+        $controller->ViewShippingHistory();
+        break;
+    case "AllOrdertByShop":
+        $controller = new ShopController();
+        $controller->AllOrdertByShop();
+        break;
     case "shipping-history":
         $controller = new ShipperController();
         $controller->ViewShippingHistory();
@@ -139,6 +155,22 @@ switch ($action) {
         $controller->updateShopStatus();
         break;
 
+    case "customer":
+        $controller = new CustomerController();
+        $controller->updateCustomerInfo();
+        break;
+    case "customer-products":
+        $controller = new CustomerController();
+        $controller->searchProduct();
+        break;
+    case "addToCart":
+        $controller = new CustomerController();
+        $controller->addToCart();
+        break;
+    case "cart":
+        $controller = new CustomerController();
+        $controller->cart();
+        break;
     default:
         $controller = new HomeController();
         $controller->index();
