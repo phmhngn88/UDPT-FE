@@ -149,6 +149,12 @@ switch ($action) {
         $controller = new AdminController();
         $controller->listReview();
         break;
+        
+    case "updateShopStatus":
+        $controller = new AdminController();
+        $controller->updateShopStatus();
+        break;
+
     case "customer":
         $controller = new CustomerController();
         $controller->updateCustomerInfo();

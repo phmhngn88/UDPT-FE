@@ -29,11 +29,13 @@ class AdminController
     public function listShipper() {
         $limit = $_POST["limit"];
         $offset = $_POST["offset"]; 
+        $search = $_POST["search"]; 
         
 
         $payload = array(
             "limit" => $limit,
             "offset" => $offset,
+            "search" => $search,
         );
 
         $getData = $this->getShippers($payload);
@@ -54,11 +56,13 @@ class AdminController
     public function listStore() {
         $limit = $_POST["limit"];
         $offset = $_POST["offset"]; 
+        $search = $_POST["search"]; 
         
 
         $payload = array(
             "limit" => $limit,
             "offset" => $offset,
+            "search" => $search,
         );
 
         $getData = $this->getStores($payload);
@@ -78,13 +82,15 @@ class AdminController
     }
 
     public function listCustomer() {
-        $limit = $_POST["limit"];
+         $limit = $_POST["limit"];
         $offset = $_POST["offset"]; 
+        $search = $_POST["search"]; 
         
 
         $payload = array(
             "limit" => $limit,
             "offset" => $offset,
+            "search" => $search,
         );
 
         $getData = $this->getCustomers($payload);
@@ -147,6 +153,18 @@ class AdminController
         $method = "GET";
 
         $result = $API->CallAPI($method, $url, $payload);
+        
+        return $result;
+    }
+    
+    public function updateShopStatus() {
+        $id = $_POST["id"];
+
+        $API = new API();
+        $url = "http://localhost:3000/api/shops/update-status/$id";
+        $method = "PUT";
+
+        $result = $API->CallAPI($method, $url, null);
         
         return $result;
     }
