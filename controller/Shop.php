@@ -214,4 +214,20 @@ class ShopController
 
         echo $result->success;
     }
+
+    public function GetNewOrderByShop()
+    {
+        $loginController = new LoginController();
+        $loginController -> authentication();
+
+
+        $API = new API();
+        $url = "http://localhost:3000/api/orders/getNewOrderByShop";
+        $method = "GET";
+
+        $result = $API->CallAPI($method, $url, null);
+
+
+        echo json_encode($result);
+    }
 }

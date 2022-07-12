@@ -49,11 +49,11 @@
         </div>
         <div id="footer"></div>
     </div>
-
+    <input id="main-role" type="hidden" value=<?= $role ?> />
 </body>
 
 <script type="text/javascript">
-    var newOrderByShipperInterval
+        var newOrderByShipperInterval
     let getNewOrderByShipper = () => {
         $.ajax({
             type: "GET",
@@ -183,8 +183,9 @@
 
 
     $(document).ready(function() {
-
+        console.log("document is ready")
         const role = $("#main-role")[0].value
+        console.log(value)
         console.log("zxc", role)
         if (role.includes("shipper")) {
             newOrderByShipperInterval = setInterval(getNewOrderByShipper, 5000)

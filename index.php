@@ -55,7 +55,7 @@ switch ($action) {
         break;
     case "get-new-order-by-shop":
         $controller = new ShopController();
-        $controller->ViewShippingHistory();
+        $controller->GetNewOrderByShop();
         break;
     case "AllOrdertByShop":
         $controller = new ShopController();
