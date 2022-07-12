@@ -1,0 +1,61 @@
+
+<table class="w-full table-auto">
+      <thead>
+        <tr>
+          <th class="border border-x-0 border-slate-600">STT</th>
+          <th class="border border-x-0 border-slate-600">ID</th>
+          <th class="border border-x-0 border-slate-600">Họ và tên</th>
+          <th class="border border-x-0 border-slate-600">Địa chỉ</th>
+          <th class="border border-x-0 border-slate-600">Email</th>
+          <th class="border border-x-0 border-slate-600">
+            Số điện thoại
+          </th>
+          <th class="border border-x-0 border-slate-600">Số đơn hàng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        $stt = 1; 
+          foreach($data as $item) {
+            echo "<tr>";
+            echo "<td class='py-3 text-center border border-x-0 border-slate-600'>";
+              echo $stt;
+            echo "</td>";
+            echo "<td class='py-3 text-center border border-x-0 border-slate-600'>";
+            echo $item->_id;
+            echo "</td>";
+            echo "<td class='py-3 text-center border border-x-0 border-slate-600'>";
+            echo $item->full_name;
+            echo "</td>";
+            echo "<td class='py-3 text-center border border-x-0 border-slate-600'>";
+            echo $item->address;
+            echo "</td>";
+            echo "<td class='py-3 text-center border border-x-0 border-slate-600'>";
+            echo $item->email;
+            echo "</td>";
+            echo "<td class='py-3 text-center border border-x-0 border-slate-600'>";
+            echo $item->phone;
+            echo "</td>";
+            if($item->totalOrders > 0) {
+              echo "<td class='py-3 text-center border border-x-0 border-slate-600'><span class='text-green-500'>$item->totalOrders</span></td>";
+            } else {
+              echo "<td class='py-3 text-center border border-x-0 border-slate-600'><span class='text-red-500'>$item->totalOrders</span></td>";
+            }
+          echo "</tr>";
+          $stt = $stt + 1;
+          }
+        ?>
+      </tbody>
+    </table>
+    <div class="mb-5 paging">
+    <div class="mx-24 current-page">
+        Trang hiện tại: <?= $currentPage ?></span>
+    </div>
+    <?php
+
+    for ($i = 1; $i <= ceil($total / (10 * 1.0)); $i++) {
+    ?>
+        <span class="pointer paging-item" onclick="get(<?= $i ?>)"><?= $i ?></span>
+    <?php
+    }
+    ?>

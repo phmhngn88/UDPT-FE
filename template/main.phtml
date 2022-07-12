@@ -38,11 +38,11 @@
     <div id="wrapper">
         <div id="smallbar"></div>
         <div id="content" class="d-flex">
-            <div id="sidebar" >
+            <div id="sidebar">
                 <?php require("include/sidebar.phtml"); ?>
             </div>
 
-            <div id="main" >
+            <div id="main">
                 <?php require($VIEW); ?>
             </div>
 
@@ -194,10 +194,8 @@
         }
         else {
             clearInterval(newOrderByShipperInterval)
+            clearInterval(newOrderByShopInterval)
         }
     });
 </script>
-
-</html>
-
 </html>

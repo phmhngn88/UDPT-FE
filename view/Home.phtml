@@ -1,30 +1,89 @@
 <h1>TRANG CHỦ</h1>
 <hr />
 
-<h1 class="text-3xl font-bold underline">
-    Chào mừng bạn đến với ứng dụng Supper Ship
-</h1>
-<h2>
-    Hãy <button class="primary"> <a href="index.php?action=login&role" class="none-decoration" style="color: white">Đăng nhập</a> </button> để bắt đầu sử dụng ứng dụng 
-</h2>
-<br />
+<?php if ($role == null || $role == '') : ?>
 
-<p>
-    Supper Ship là ứng dụng giúp bạn dễ dàng đặt hàng và nhận hàng trong thời gian rất ngắn
-    <img src="images/shipper_1.jpeg" width="100%"/>
-</p>
-<br />
+    <h1 class="text-3xl font-bold underline">
+        Chào mừng bạn đến với ứng dụng Supper Ship
+    </h1>
+    <h2>
+        Hãy <button class="primary"> <a href="index.php?action=login&role" class="none-decoration" style="color: white">Đăng nhập</a> </button> để bắt đầu sử dụng ứng dụng
+    </h2>
+    <br />
 
-<p>
-    Bạn sẽ được thỏa sức mua sắm các món đồ từ những gian hàng đối tác của ứng dụng
-</p>
-<br />
+    <p>
+        Supper Ship là ứng dụng giúp bạn dễ dàng đặt hàng và nhận hàng trong thời gian rất ngắn
+        <img src="images/shipper_1.jpeg" width="100%" />
+    </p>
+    <br />
 
-<img src="images/shopping.jpeg" width="100%"/>
+    <p>
+        Bạn sẽ được thỏa sức mua sắm các món đồ từ những gian hàng đối tác của ứng dụng
+    </p>
+    <br />
 
-<p>
-    Chỉ cần vài thao tác là món đồ của bạn đã đến tay bạn thông qua đội ngũ shipper của chúng tôi
-</p>
-<br />
+    <img src="images/shopping.jpeg" width="100%" />
 
-<img src="images/shipping2.jpeg" width="100%"/>
+    <p>
+        Chỉ cần vài thao tác là món đồ của bạn đã đến tay bạn thông qua đội ngũ shipper của chúng tôi
+    </p>
+    <br />
+
+    <img src="images/shipping2.jpeg" width="100%" />
+<?php elseif ($role == "shipper") : ?>
+    <div>
+        <h1 class="text-3xl font-bold underline">
+            Chào mừng quý tài xế đến với ứng dụng Supper Ship
+        </h1>
+        <h2>
+            Hãy trải nghiệm ứng dụng với các tính năng được hỗ trợ như
+        </h2>
+        <br />
+        <ul>
+            <li>
+                <a href="index.php?action=shipping-history">Lịch sử giao hàng</a>
+            </li>
+            <li>
+                <a href="index.php?action=delivering">Đơn đang giao</a>
+            </li>
+            <li>
+                <a href="index.php?action=health-history">Thông tin sức khỏe</a>
+            </li>
+        </ul>
+        <p>
+            <i>
+                Supper Ship sẽ đồng hành cùng quý tài xế trong suốt quá trình cộng tác
+
+            </i>
+        </p>
+        <br />
+        <div class="d-flex justify-center" style="width: 100%">
+            <img src="images/support-illustration-880x1024.png" width="50%" height="600px" />
+
+        </div>
+
+        <p>
+            <i>
+                Bạn sẽ cùng với chúng tôi cung cấp những dịch vụ tốt nhất người dùng và các cửa hàng
+
+            </i>
+        </p>
+        <br />
+
+        <img src="images/nhan-hang-va-thanh-toan-cod.jpeg" width="100%" />
+
+        <p>
+            <i>
+                Supper Ship và bạn sẽ cùng nhau phát triển thật vững mạnh
+
+            </i>
+        </p>
+        <br />
+        <div class="d-flex justify-center" style="width: 100%">
+        <img src="images/humancapita-15678510049321574921840.jpeg" width="70%" />
+
+        </div>
+
+        <br />
+    </div>
+<?php endif ?>                                                                   

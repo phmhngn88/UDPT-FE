@@ -1,0 +1,68 @@
+<?php
+require_once("constant.php");
+
+?>
+
+<script type="text/javascript">
+    let search = function(currentPage, currentSize) {
+
+        let page = currentPage ?? 1;
+        let size = currentSize ?? 10;
+
+        let from = $("#search-from-date")[0].value;
+        let to = $("#search-to-date")[0].value;
+
+        $.post({
+            url: `index.php?action=search-health-history`,
+            data: {
+                page,
+                size,
+                from,
+                to
+
+            },
+            success: function(response) {
+                $("#health-history").html(response)
+
+            }
+        });
+
+
+    };
+    $(document).ready(function() {
+
+        const now = new Date().toISOString().substring(0, 10);
+
+        document.getElementById('search-from-date').value = now;
+        document.getElementById('search-to-date').value = now;
+    });
+</script>
+<h1>Tình trạng sức khỏe</h1>
+<hr />
+
+<div class="d-flex align-items-end justify-content-space-between">
+    <div class="d-flex justify-content-space-between align-items-space-between flex-column ">
+        <label for="search-from-date">Từ ngày </label>
+        <br />
+
+        <input id="search-from-date" class="w-275 h-24" type="date" />
+    </div>
+    <div class="d-flex justify-content-space-between align-items-space-between flex-column ">
+        <label for="search-to-date">Đến ngày </label> <br />
+        <input id="search-to-date" class="w-275 h-24" type="date" />
+    </div>
+    <div class=" d-flex align-items-end justify-content-start">
+        <button class="primary h-32" style="width: 100px" onclick="search()">Tìm</button>
+
+    </div>
+    <div class=" d-flex align-items-end justify-content-end">
+        <a href="index.php?action=add-health-history">
+            <button class="default h-32">Cập nhật tình trạng sức khỏe</button>
+
+        </a>
+
+    </div>
+
+</div>
+<div id="health-history" class="mt-24">
+</div>
