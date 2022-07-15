@@ -59,11 +59,11 @@ switch ($action) {
         break;
     case "get-new-order-by-shop":
         $controller = new ShopController();
-        $controller->ViewShippingHistory();
+        // $controller->ViewShippingHistory();
         break;
     case "AllOrdertByShop":
         $controller = new ShopController();
-        $controller->AllOrdertByShop();
+        // $controller->AllOrdertByShop();
         break;
     case "shipping-history":
         $controller = new ShipperController();
