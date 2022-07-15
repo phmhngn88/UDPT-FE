@@ -61,9 +61,25 @@ switch ($action) {
         $controller = new ShopController();
         $controller->GetNewOrderByShop();
         break;
-    case "AllOrdertByShop":
+    case "AllOrderByShop":
         $controller = new ShopController();
-        $controller->AllOrdertByShop();
+        $controller->AllOrderByShop();
+        break;
+    case "listOrder":
+        $controller = new ShopController();
+        $controller->listOrder();
+        break;
+    case "shop-order-detail":
+        $controller = new ShopController();
+        $controller->OrderDetail();
+        break;
+    case "shopListShipper":
+        $controller = new ShopController();
+        $controller->shopListShipper();
+        break;
+    case "shopUpdateOrder":
+        $controller = new ShopController();
+        $controller->shopUpdateOrder();
         break;
     case "shipping-history":
         $controller = new ShipperController();

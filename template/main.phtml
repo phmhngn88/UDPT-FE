@@ -53,7 +53,7 @@
 </body>
 
 <script type="text/javascript">
-        var newOrderByShipperInterval
+    var newOrderByShipperInterval
     let getNewOrderByShipper = () => {
         $.ajax({
             type: "GET",
@@ -119,6 +119,10 @@
 
     var newOrderByShopInterval
     let getNewOrderByShop = () => {
+        path = window.location.href
+        console.log(path)
+        if (!path.includes(`index.php?action=shop-order-detail`)) {
+            console.log("is calling api")
         $.ajax({
             type: "GET",
             url: `index.php?action=get-new-order-by-shop`,
@@ -130,67 +134,28 @@
                 }
                 let data = JSON.parse(response);
                 if (data.success && data.message === "success") {
-                    if (confirm(`Có đơn hàng mới với giá trị đơn: ${data.data?.total_cost}?. Bạn có muốn nhận đơn này?`) === true) {
-                        $.ajax({
-                            type: "POST",
-                            url: `index.php?action=shop-update-order-status`,
-                            data: {
-                                id: data.data._id,
-                                status: "1"
-                            },
-                            success: function(res) {
-                                if (res) {
-
-                                    if (confirm("Cập nhật trạng thái đơn hàng thành công")) {
-
-                                        window.location.replace("index.php?action=delivering")
-                                    } else {
-                                        window.location.replace("index.php?action=delivering")
-
-                                    }
-                                }
-
-                            }
-                        });
+                    if (confirm(`Có đơn hàng mới với giá trị đơn: ${data.data?.total_cost}?. Bạn có muốn xem đơn này?`) === true) {
+                        let id = data.data?._id;
+                        window.location.replace(`index.php?action=shop-order-detail&id=${id}`)
                     } else {
-                        $.ajax({
-                            type: "POST",
-                            url: `index.php?action=shop-update-order-status`,
-                            data: {
-                                id: data.data._id,
-                                status: "-2"
-                            },
-                            success: function(res) {
-                                if (res) {
-
-                                    if (confirm("Cập nhật trạng thái đơn hàng thành công")) {
-
-                                        window.location.replace("index.php?action=shipping-history")
-                                    } else {
-                                        window.location.replace("index.php?action=shipping-history")
-
-                                    }
-                                }
-
-                            }
-                        });
                     }
                 }
-
             }
         });
+    }else {
+
+        }
     }
 
 
     $(document).ready(function() {
         console.log("document is ready")
         const role = $("#main-role")[0].value
-        console.log(value)
         console.log("zxc", role)
         if (role.includes("shipper")) {
             newOrderByShipperInterval = setInterval(getNewOrderByShipper, 5000)
         }else if (role.includes("shop")){
-            newOrderByShipperInterval = setInterval(getNewOrderByShipper, 5000)
+            newOrderByShipperInterval = setInterval(getNewOrderByShop, 5000)
         }
         else {
             clearInterval(newOrderByShipperInterval)
