@@ -7,18 +7,28 @@
 <br />
 <form action="index.php?action=customer" method="post" class="mt-24">
     <div class="d-flex align-items-start">
-        <span style="display:inline-block; width:200px">Địa chỉ: </span> <input name="address" type="text" />
+        <span style="display:inline-block; width:200px">Họ tên: </span>
+        <input type="text" value="<?php echo $info->full_name ?>" readonly/>
     </div>
     <br />
     <div class="d-flex align-items-start">
-        <span style="display:inline-block; width:200px">Điện thoại </span> <input name="phone" type="text" />
+        <span style="display:inline-block; width:200px">Email: </span>
+        <input type="text" value="<?php echo $info->email ?>" readonly/>
+    </div>
+    <br />
+    <div class="d-flex align-items-start">
+        <span style="display:inline-block; width:200px">Địa chỉ:</span>
+        <input name="address" type="text" value="<?php echo $info->address?>"  />
+    </div>
+    <br />
+    <div class="d-flex align-items-start">
+        <span style="display:inline-block; width:200px">Điện thoại</span>
+        <input name="phone" type="text" value="<?php echo $info->phone?>" />
     </div>
     <br />
 
     <br />
 
-    <div><b style="color: red"><?= $data ?></b></div>
     <br />
-    <input type="hidden" value=<?= $role ?> />
     <button class="primary full-width" type="submit">Cập Nhật</button>
 </form>

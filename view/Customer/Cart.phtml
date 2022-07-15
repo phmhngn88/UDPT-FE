@@ -1,0 +1,116 @@
+
+
+<div id="shopping-cart">
+    <div class="txt-heading">Shopping Cart</div>
+
+    <a id="btnEmpty" href="index.php?action=empty">Empty Cart</a>
+ <form action="index.php?action=create-order" method="post" id="cartform">
+    <?php
+    if(isset($_SESSION["cart_item"])){
+        $total_quantity = 0;
+        $total_price = 0;
+        ?>
+        <table class="tbl-cart" cellpadding="10" cellspacing="1" width="100%">
+            <tbody>
+            <tr>
+                <th style="text-align:left;" width="30%">Tên</th>
+                <th style="text-align:right;" width="10%">Số lượng</th>
+                <th style="text-align:right;" width="10%">Giá/Đơn vi</th>
+                <th style="text-align:right;" width="20%">Giá</th>
+                <th style="text-align:center;" width="30%">Xóa</th>
+            </tr>
+            <?php
+            foreach ($_SESSION["cart_item"] as $item){
+                $item_price = (int)$item["quantity"]*(int)$item["price"];
+                ?>
+                <tr>
+                    <td>
+<!--                        <img src="--><?php //echo $item["image"]; ?><!--" class="cart-item-image" />-->
+                        <?php echo $item["name"]; ?>
+                    </td>
+                    <td style="text-align:right;">
+                        <?php echo $item["quantity"]; ?>
+                    </td>
+                    <td  style="text-align:right;"><?php echo $item["price"]." VND"; ?></td>
+                    <td  style="text-align:right;"><?php echo $item_price." VND"; ?></td>
+                    <td style="text-align:center;">
+                        <a href="index.php?action=remove&id=<?php echo $item["id"]; ?>" class="btnRemoveAction">
+<!--                            <img src="icon-delete.png" alt="Remove Item" />-->
+                            <h4>Xóa khỏi giỏ hàng</h4>
+                        </a>
+                    </td>
+                    <input class="ids" type="hidden" value="<?php echo $item["id"]?>" name="ids[]" />
+                    <input class="quantities" style="text-align:right; border: none;" type="hidden"
+                           value="<?php echo $item["quantity"]; ?>"
+                           name="quantities[]" readonly />
+                </tr>
+                <?php
+                $total_quantity += $item["quantity"];
+                $total_price += ((int)$item["price"]*(int)$item["quantity"]);
+            }
+            ?>
+
+            <tr>
+                <td colspan="2" align="right">Total:</td>
+                <td align="right"><?php echo $total_quantity; ?></td>
+                <td align="right" colspan="2">
+                    <strong><?php echo $total_price." VND"; ?></strong>
+                </td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <label for="payment">Chọn hình thức thanh toán: </label>
+        <select name="payment" id="payment" form="cartform" >
+            <?php
+            foreach ($payments as $item) {
+                ?>
+                <option value="<?php echo $item->_id ?>" >
+                    <?php echo $item->name?? "COD" ?>
+                </option>
+        <?php
+            }
+            ?>
+        <input class="primary full-width" style="margin: 10px" type="submit" value="Thanh toán giỏ hàng">
+ </form>
+        <?php
+    } else {
+        ?>
+        <div class="no-records">Your Cart is Empty</div>
+        <?php
+    }
+    ?>
+
+</div>
+<script>
+    let quantitiesEl = $(".quantities");
+    const quantities = [];
+    for (const quantity of quantitiesEl) {
+        quantities.push(+quantity.value);
+    }
+
+    let idsEl = $(".ids");
+    const ids = [];
+    for (const id of idsEl) {
+        ids.push(id.value);
+    }
+
+    const items = ids.map((id,idx) => ({id: id, quantity: quantities[idx]}))
+
+    let payment_ID = $("#payment").val();
+
+    const payload = {items, payment_ID};
+    const token = "<?php echo $_SESSION["Token"] ?>";
+    console.log(payload);
+    // $.ajax({
+    //     url: 'http://0.0.0.0:3000/api/orders',
+    //     type: 'post',
+    //     data: payload,
+    //     headers: {
+    //         authorization: token
+    //     },
+    //     dataType: 'json',
+    //     success: (data) => console.log(`Created ${data}`),
+    //     error: (data) => console.log(data),
+    // });
+</script>
