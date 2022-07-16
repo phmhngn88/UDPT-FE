@@ -1,0 +1,66 @@
+<h1>Thông tin sản phẩm</h1>
+<hr />
+<div>
+    <a href="index.php"> <button class="default">Quay lại</button>
+    </a>
+</div>
+<br />
+<form action="index.php?action=customer" method="post" class="mt-24">
+    <div class="d-flex align-items-start">
+        <span style="display:inline-block; width:200px">Tên sản phẩm: </span>
+        <input style="border: none" type="text" value="<?php echo $data->name ?>" readonly/>
+    </div>
+    <br />
+    <div class="d-flex align-items-start">
+        <span style="display:inline-block; width:200px">Giá: </span>
+        <input style="border: none" type="text" value="<?php echo $data->unit_price ?>" readonly/>
+    </div>
+    <br />
+    <div class="d-flex align-items-start">
+        <span style="display:inline-block; width:200px">Kho:</span>
+        <input style="border: none" name="address" type="text" value="<?php echo $data->inventory?>"  />
+    </div>
+    <br />
+    <div class="d-flex align-items-start">
+        <span style="display:inline-block; width:200px">Đơn vị:</span>
+        <input style="border: none" name="address" type="text" value="<?php echo $data->unit?>"  />
+    </div>
+    <br />
+    <div class="d-flex align-items-start">
+        <span style="display:inline-block; width:200px">Mô tả</span>
+        <input style="border: none" name="phone" type="text" value="<?php echo $data->description?>" />
+    </div>
+    <br />
+
+    <br />
+
+    <br />
+</form>
+<h2>Đánh giá sản phẩm</h2>
+<hr />
+<div>
+
+    <form action="index.php?action=post-review" method="post">
+        <label for="">Đánh giá sản phẩm: </label>
+        <input type="text" name="content" value=""/>
+        <br>
+        <label>Rate sản phẩm</label>
+        <input style="width: 40px; margin: 20px" type="number" name="rate" placeholder="Rate sản phẩm" value="5">
+        <br>
+        <input type="hidden" value="<?php echo $data->_id ?>" name="productID">
+        <input type="submit" value="Đăng review" class="default">
+    </form>
+</div>
+
+<?php
+    foreach ($reviews as $review) {
+        ?>
+        <div style="border: 1px solid #333; border-radius: 5px; padding: 10px; margin: 30px">
+            <span><strong>Rate: </strong></span> <span><?= $review->rate ?></span>
+            <br>
+            <span><strong>Đánh giá: </strong></span> <span><?= $review->content ?></span>
+        </div>
+<?php
+    }
+?>
+<br />
