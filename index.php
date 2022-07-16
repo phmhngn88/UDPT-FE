@@ -212,6 +212,25 @@ switch ($action) {
         $controller = new CustomerController();
         $controller->cart();
         break;
+    case "remove":
+        $controller = new CustomerController();
+        $controller->removeItem();
+        break;
+    case "empty":
+        $controller = new CustomerController();
+        $controller->emptyCart();
+        break;
+    case "create-order":
+        $controller = new CustomerController();
+        $controller->createOrder();
+        break;
+    case "product-detail":
+        $controller = new CustomerController();
+        $controller->productDetail();
+        break;
+    case "post-review":
+        $controller= new CustomerController();
+        $controller->postReview();
     case "cusCart":
         $controller = new CustomerBackupController();
         $controller->cart();

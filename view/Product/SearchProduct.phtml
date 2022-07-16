@@ -1,22 +1,76 @@
+<div>
+<div id="product-grid">
+    <div class="txt-heading">Products</div>
+    <div class="d-flex align-items-start justify-content-space-between">
+        <div class="d-flex justify-content-space-between align-items-space-between flex-column">
+            <label for="search-product-name">Tên sản phẩm </label> <br />
+
+            <input id="search-order-name" class="w-275 h-28" type="text" />
+
+        </div>
+    </div>
+    <div class="mt-24 d-flex ">
+
+
+        <div class="full-width d-flex align-items-end justify-content-end" >
+            <button class="primary h-32" style="width: 300px" onclick="search()">Tìm</button>
+
+        </div>
+
+
+    </div>
 <?php
 if (!empty($data)) {
+
     foreach ($data->items as $key=>$value) {
 ?>
-<div class="product-item">
-    <form method="post" action="index.php?action=addToCart">
-        <div class="product-image"><img src=""></div>
-        <div class="product-tile-footer">
-            <div class="product-title"><?php echo $value->name; ?></div>
-            <div class="product-price"><?php echo $value->unit_price ."VND"; ?></div>
-            <div class="cart-action">
-                <input type="number" class="product-quantity" name="quantity" value="1" size="2" />
-                <input type="submit" value="Add to Cart" class="btnAddAction" /></div>
-        </div>
-    </form>
-</div>
+    <div class="product-item">
+        <iframe name="votar" style="display:none;"></iframe>
+        <form method="post" action="index.php?action=addToCart">
+            <div class="product-image"><img src=""></div>
+            <div class="product-tile-footer">
+                <div class="product-title"><a href="index.php?action=product-detail&id=<?php echo $value->_id; ?>"><?php echo $value->name; ?></a></div>
+                <div class="product-price"><?php echo $value->unit_price ." VND "; ?></div>
+                <div class="cart-action">
+                    <input type="hidden" name="id" value=<?php echo $value->_id; ?> />
+                    <input type="hidden" name="name" value="<?php echo $value->name; ?>" />
+                    <input type="hidden" name="price" value=<?php echo $value->unit_price; ?> />
+                    <input style="width: 80px; height: 10px" type="number" class="product-quantity" name="quantity" value="1" size="2" />
+                    <input type="submit" value="Add to Cart" class="btnAddAction" /></div>
+            </div>
+        </form>
+    </div>
+
 <?php
     }
 }
 ?>
+    <div></div>
 
+</div>
+</div>
+<div class="paging block">
+    <div class="current-page mx-24">
+        Trang hiện tại: <span><?= $page ?></span>
+    </div>
+    <?php
+
+    for ($i = 1; $i <= $total_page; $i++) {
+        ?>
+        <span class="pointer paging-item" onclick="onChangeCurrentPage(<?= $i ?>, 10)"><?= $i ?></span>
+        <?php
+    }
+    ?>
+</div>
+
+<script type="text/javascript">
+    function onChangeCurrentPage(page, size) {
+        window.location.href = `index.php?action=customer-products&page=${page}&keyword=<?php echo $keyword ?>`;
+    }
+
+    function search() {
+        const keyword = $('#search-order-name').val();
+        window.location.href = `index.php?action=customer-products&page=1&keyword=${keyword}`;
+    }
+</script>
 
