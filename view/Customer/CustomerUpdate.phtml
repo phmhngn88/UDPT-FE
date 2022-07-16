@@ -1,0 +1,24 @@
+<h1>Cập nhật thông tin Customer</h1>
+<hr />
+<div>
+    <a href="index.php"> <button class="default">Quay lại</button>
+    </a>
+</div>
+<br />
+<form action="index.php?action=customer" method="post" class="mt-24">
+    <div class="d-flex align-items-start">
+        <span style="display:inline-block; width:200px">Địa chỉ: </span> <input name="address" type="text" />
+    </div>
+    <br />
+    <div class="d-flex align-items-start">
+        <span style="display:inline-block; width:200px">Điện thoại </span> <input name="phone" type="text" />
+    </div>
+    <br />
+
+    <br />
+
+    <div><b style="color: red"><?= $data ?></b></div>
+    <br />
+    <input type="hidden" value=<?= $role ?> />
+    <button class="primary full-width" type="submit">Cập Nhật</button>
+</form>

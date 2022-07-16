@@ -1,0 +1,57 @@
+
+  <?php foreach($data as $item) {
+              echo "<div class='flex-col w-full mt-5 item'>";
+              echo "<div class='flex justify-between w-full h-auto p-5 rounded-md bg-slate-500'>";
+                echo "<div class='flex justify-between'>";
+                  echo "<div class='flex flex-col px-5 text-left info'>";
+                    echo "<h2 class='text-orange-400'>";
+                    echo $item->author->full_name;
+                    echo "</h2>";
+                    echo "<p class='text-white'>";
+                    echo $item->content;
+                    echo "</p>";
+                  echo "</div>";
+                echo "</div>";
+                echo "<div class='text-blue-400'>Người dùng</div>";
+              echo "</div>";
+              if(count($item->replyList) > 0) {
+                foreach($item->replyList as $repItem) {
+                  echo "<div class='flex flex-col mt-2 listReply'>";
+                  echo "<div class='repItem flex-col p-2 pl-3 rounded bg-slate-400 w-[90%] ml-20 h-auto text-left'>";
+                  echo "<h2 class='text-blue-700'>Admin</h2>";
+                  echo "<p class='text-blue-500'>";
+                  echo $repItem->content;
+                  echo "</p>";
+                  echo "</div>";
+                  echo "</div>";
+                }
+              }
+              echo "<div class='flex w-4/5 mt-2 ml-40'>";
+                echo "<input
+                  type='search'
+                  class='form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
+                  placeholder='Trả lời'
+                  aria-label='Search'
+                  id=\"$item->_id\"
+                  aria-describedby='button-addon2'
+                />";
+                echo "<button onclick='reply(\"$item->_id\")' class='w-20 ml-1 text-white bg-blue-500 rounded'>";
+                  echo "Trả lời";
+                echo "</button>";
+              echo "</div>";
+            echo "</div>";
+  } ?>
+  <div class="mb-5 paging">
+    <div class="mx-24 current-page">
+        Trang hiện tại: <span><?= $currentPage ?></span>
+    </div>
+    <?php
+
+    for ($i = 1; $i <= ceil($total / (10 * 1.0)); $i++) {
+    ?>
+        <span class="pointer paging-item" onclick="get(<?= $i ?>)"><?= $i ?></span>
+    <?php
+    }
+    ?>
+
+

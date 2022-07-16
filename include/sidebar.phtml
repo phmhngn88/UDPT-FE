@@ -47,4 +47,32 @@
 
         </div>
     <?php endif ?>
+
+    <?php if (isset($_SESSION["IsLogined"]) && $_SESSION["IsLogined"] == True && $_SESSION["role"] == "customer"): ?>
+        <div class="menu">
+            <ul>
+                <li>
+                    <a href="index.php"><br>Trang chủ<br/></a>
+                </li>
+                <li>
+                    <a href="index.php?action=customer"><br>Thông tin cá nhân<br/></a>
+                </li>
+                <li>
+                    <a href="index.php?action=customer-products"><br>Sản phẩm<br/></a>
+                </li>
+                <li>
+                    <a href="index.php?action=cusViewStore"><br>Mua sắm<br/></a>
+                </li>
+                <li>
+                    <a href="index.php?action=cusCart"><br>Giỏ hàng mới<br/></a>
+                </li>
+                <li>
+                <li>
+                    <a href="index.php?action=cart"><br>Giỏ hàng<br/></a>
+                </li>
+                </li>
+            </ul>
+
+        </div>
+    <?php endif ?>
 </div>
