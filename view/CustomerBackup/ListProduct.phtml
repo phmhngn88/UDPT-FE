@@ -1,0 +1,66 @@
+<script type="text/javascript">
+    let get = function(page) {
+
+        let limit = 10;
+        let shopId = $("#shop-id")[0].value
+        let search = $("#search-text")[0].value
+        $.post({
+            url: `index.php?action=cusGetProductOfShopAJAX`,
+            data: {
+                limit,
+                page,
+                shopId,
+                search
+            },
+            success: function(response) {
+                $("#product-list").html(response)
+            }
+        });
+
+
+    };
+    let addProductToCart = (id, name) => {
+
+        if (confirm(`Bạn muốn thêm sản phẩm '${name}' vào giỏ hàng?`)) {
+            console.log("zxc", id)
+            $.post({
+            url: `index.php?action=addProductToCart`,
+            data: {
+                id
+            },
+            success: function(response) {
+                console.log("zxc", response)
+                confirm(`Thêm sản phẩm vào giỏ hàng thành công`)
+
+            }
+        });
+        }
+
+
+
+    };
+    $(document).ready(function() {
+        get(1)
+    });
+</script>
+<div class="flex justify-between w-full p-5 header">
+    <h2>DANH SÁCH SẢN PHẨM</h2>
+</div>
+<a href="index.php?action=">
+<button class="default">Quay lại</button>
+
+</a>
+<div class="flex justify-start">
+    <!-- search form -->
+    <div class="px-5 mb-2 xl:w-96">
+        <div class="relative flex items-stretch w-full mb-4 input-group">
+            <input type="text" id="search-text" placeholder="Search">
+            <button onclick="get(1)" class="primary" type="button" id="button-addon2" style="height:34px;">
+                Tìm
+            </button>
+        </div>
+    </div>
+</div>
+<div class="flex flex-col justify-between px-5 ds" id="product-list"></div>
+
+<input type="hidden" id="shop-id" value=<?= $id ?>>

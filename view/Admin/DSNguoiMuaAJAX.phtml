@@ -12,7 +12,9 @@
       <tbody>
       <?php 
           foreach ($data as $item) 
-          {  
+          {
+            $item->full_name = $item->full_name ? $item->full_name : "";
+            $item->address = $item->address ? $item->address : "";
             echo "<tr>";
             echo "<td class='py-3 text-center border border-x-0 border-slate-600'>$item->_id</td>";
             echo "<td class='py-3 text-center border border-x-0 border-slate-600'>$item->full_name</td>";

@@ -1,0 +1,55 @@
+<table class="w-full table-auto mt-24">
+  <thead>
+    <tr>
+      <th></th>
+      <th class="border border-x-0 border-slate-600">Tên cửa hàng</th>
+      <th class="border border-x-0 border-slate-600" style="text-align: center;">Email</th>
+      <th class="border border-x-0 border-slate-600" style="text-align: center; width: 200px;">Số điện thoại</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+
+    foreach ($data as $key => $item) {
+    ?>
+
+
+      <tr style="height: 40px">
+
+        <td>
+          <img src="images/coffeelogo.webp" width="150px" height="150px"/>
+        </td>
+        <td>
+          <?= $item->name ?>
+        </td>
+        <td style="text-align: center;">
+          <?= $item->email ?>
+        </td>
+        <td style="text-align: center; width: 200px;">
+          <?= $item->phone ?>
+        </td>
+      <td style="text-align: center; width: 200px;">
+        <a href="index.php?action=cusViewProductOfShop&id=<?=$item->_id ?>">
+          <button class="success">Xem sản phẩm của shop</button>
+        </a>
+      </td>
+      </tr>
+
+    <?php
+    }
+    ?>
+  </tbody>
+</table>
+<div class="mb-5 paging">
+  <div class="mx-24 current-page">
+    Trang hiện tại: <?= $currentPage ?></span>
+  </div>
+  <?php
+
+  for ($i = 1; $i <= ceil($total / (10 * 1.0)); $i++) {
+  ?>
+    <span class="pointer paging-item" onclick="get(<?= $i ?>)"><?= $i ?></span>
+  <?php
+  }
+  ?>

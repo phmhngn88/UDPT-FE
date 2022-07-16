@@ -563,3 +563,18 @@ input[type="date"]::-webkit-search-cancel-button {
   display: block !important;
   width: 100%;
 }
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.m-16 {
+  margin: 24px;
+}
+
+.mb-24 {
+  margin-bottom: 24px;
+}

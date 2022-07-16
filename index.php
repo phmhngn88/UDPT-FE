@@ -10,6 +10,7 @@ require_once("./controller/Admin.php");
 require_once("config/dbconnect.php");
 require_once("./controller/Product.php");
 require_once("./controller/Customer.php");
+require_once("./controller/CustomerBackup.php");
 
 $action = "";
 if (isset($_REQUEST["action"])) {
@@ -53,17 +54,43 @@ switch ($action) {
         $controller = new ShopController();
         $controller->listProduct();
         break;
+    case "cusViewProductOfShop":
+        $controller = new CustomerBackupController();
+        $controller->viewListProduct();
+        break;
+    case "cusGetProductOfShopAJAX":
+        $controller = new CustomerBackupController();
+        $controller->listProduct();
+        break;
     case "shop-update-order-status":
         $controller = new ShopController();
         $controller->UpdateOrderStatus();
         break;
     case "get-new-order-by-shop":
         $controller = new ShopController();
-        $controller->ViewShippingHistory();
+        $controller->GetNewOrderByShop();
         break;
-    case "AllOrdertByShop":
+    case "AllOrderByShop":
         $controller = new ShopController();
-        $controller->AllOrdertByShop();
+        $controller->AllOrderByShop();
+        break;
+    case "listOrder":
+        $controller = new ShopController();
+        $controller->listOrder();
+        break;
+    case "shop-order-detail":
+        $controller = new ShopController();
+        $controller->OrderDetail();
+        break;
+    case "shopListShipper":
+        $controller = new ShopController();
+        $controller->shopListShipper();
+        // $controller->ViewShippingHistory();
+        break;
+    case "shopUpdateOrder":
+        $controller = new ShopController();
+        $controller->shopUpdateOrder();
+        // $controller->AllOrdertByShop();
         break;
     case "shipping-history":
         $controller = new ShipperController();
@@ -129,9 +156,13 @@ switch ($action) {
         $controller = new AdminController();
         $controller->viewStore();
         break;
+    case "cusViewStore":
+        $controller = new CustomerBackupController();
+        $controller->viewStore();
+        break;
         
-    case "listStore":
-        $controller = new AdminController();
+    case "cusListStore":
+        $controller = new CustomerBackupController();
         $controller->listStore();
         break;
 
@@ -145,10 +176,26 @@ switch ($action) {
         $controller->listCustomer();
         break;
 
+    case "viewReview":
+        $controller = new AdminController();
+        $controller->viewReview();
+        break;
+
     case "listReview":
         $controller = new AdminController();
         $controller->listReview();
         break;
+        
+    case "replyComment":
+        $controller = new AdminController();
+        $controller->replyComment();
+        break;
+
+    case "updateShopStatus":
+        $controller = new AdminController();
+        $controller->updateShopStatus();
+        break;
+
     case "customer":
         $controller = new CustomerController();
         $controller->updateCustomerInfo();
@@ -184,6 +231,13 @@ switch ($action) {
     case "post-review":
         $controller= new CustomerController();
         $controller->postReview();
+    case "cusCart":
+        $controller = new CustomerBackupController();
+        $controller->cart();
+        break;
+    case "addProductToCart":
+        $controller = new CustomerBackupController();
+        $controller->addProductToCart();
         break;
     default:
         $controller = new HomeController();
