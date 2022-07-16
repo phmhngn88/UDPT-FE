@@ -434,3 +434,19 @@ input[type="date"]::-webkit-search-cancel-button {
 .ml-8 {
     margin-left: 8px;
 }
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.m-16 {
+  margin: 24px;
+}
+
+.mb-24 {
+  margin-bottom: 24px;
+}

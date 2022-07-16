@@ -1,0 +1,68 @@
+
+
+
+<script type="text/javascript">
+   
+</script>
+
+<?php if ($total == 0) : ?>
+    <div class="mt-24">Danh sách rỗng</div>
+<?php else : ?>
+    <div class="d-flex flex-wrap overflow-hidden ">
+
+        <?php
+
+        foreach ($data as $key => $item) {
+        ?>
+
+            <a class="m-16">
+                <div class="d-flex flex-column">
+                    <div class="image">
+                        <img src="images/food.jpeg" alt="" width="500px" height="250px">
+                    </div>
+                    <div class="info d-flex flex-column">
+                        <div class="product-name">
+                            <b>
+                                <?= $item->name ? $item->name : 'Món ngon' ?>
+
+                            </b>
+                        </div>
+                        <div class="product-price d-flex justify-content-space-between">
+                            <span>
+                                <?= $item->unit_price ?> 💲
+
+                            </span>
+                            <span>
+                                SL: <?= $item->inventory ?>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="add-cart mt-8 full-width">
+                        <button class="success full-width" onclick="addProductToCart('<?= $item->_id ?>', '<?= $item->name ? $item->name : 'Món ngon' ?>')">
+                            Thêm vào giỏ
+                        </button>
+                    </div>
+                </div>
+            </a>
+
+
+        <?php
+        }
+        ?>
+
+
+    </div>
+    <div class="mb-24 paging">
+        <div class="mx-24 current-page">
+            Trang hiện tại: <?= $currentPage ?></span>
+        </div>
+        <?php
+
+        for ($i = 1; $i <= ceil($total / (10 * 1.0)); $i++) {
+        ?>
+            <span class="pointer paging-item" onclick="get(<?= $i ?>)"><?= $i ?></span>
+        <?php
+        }
+        ?>
+    </div>
+<?php endif ?>
