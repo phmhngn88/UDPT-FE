@@ -74,7 +74,7 @@ class ShopController
 
             $payload = array(
                 "name" => $name, "description" => $description,
-                "$inventory" => $inventory, "unit_price" => $unit_price,
+                "inventory" => $inventory, "unit_price" => $unit_price,
                 "unit" => $unit, "product_type" => $product_type,
             );
             print_r($payload);
@@ -215,5 +215,126 @@ class ShopController
 
 
         echo $result->success;
+    }
+
+    public function GetNewOrderByShop()
+    {
+        $loginController = new LoginController();
+        $loginController -> authentication();
+
+
+        $API = new API();
+        $url = "http://localhost:3000/api/orders/getNewOrderByShop";
+        $method = "GET";
+
+        $result = $API->CallAPI($method, $url, null);
+
+
+        echo json_encode($result);
+    }
+
+    public function AllOrderByShop()
+    {
+        $loginController = new LoginController();
+        $loginController -> authentication();
+
+        $VIEW = "./view/shop/ListOrder.phtml";
+        $role="";
+        require("./template/main.phtml");
+    }
+
+    public function listOrder() {
+        $limit = $_POST["limit"];
+        $offset = $_POST["offset"];
+
+
+        $payload = array(
+            "limit" => $limit,
+            "offset" => $offset,
+        );
+
+        $getData = $this->getOrder($payload);
+        $data = $getData->data->orders;
+        $total = $getData->data->orderCount;
+        $currentPage = ($offset + $limit) / $limit;
+
+        $VIEW = "./view/Shop/ListOrderAjax.phtml";
+        require($VIEW);
+    }
+
+    private function getOrder($payload) {
+        $API = new API();
+        $url = "http://localhost:3000/api/orders/getAllByShop";
+        $method = "GET";
+
+        $result = $API->CallAPI($method, $url, $payload);
+
+        return $result;
+    }
+
+    public function OrderDetail()
+    {
+        $loginController = new LoginController();
+        $loginController -> authentication();
+        $id = $_REQUEST["id"];
+
+
+        $API = new API();
+        $url = "http://localhost:3000/api/orders/getDetailByShop?id=$id";
+        $method = "GET";
+
+        $result = $API->CallAPI($method, $url, null);
+
+        $data = $result->data;
+        if ($result->message != "success") {
+            $data = null;
+        }
+        $role = $_SESSION["role"];
+
+        $VIEW = "view/Shop/Shop_OrderDetail.phtml";
+        require("./template/main.phtml");
+    }
+
+    public function shopListShipper() {
+        $limit = $_POST["limit"];
+        $offset = $_POST["offset"];
+
+
+        $payload = array(
+            "limit" => $limit,
+            "offset" => $offset,
+        );
+
+        $getData = $this->getShippers($payload);
+        $data = $getData->data->shipper;
+        $total = $getData->data->shipperCount;
+        $currentPage = ($offset + $limit) / $limit;
+
+        $VIEW = "./view/Shop/shop_listShipperAjax.phtml";
+        require($VIEW);
+    }
+
+    private function getShippers($payload) {
+        $API = new API();
+        $url = "http://localhost:3000/api/shippers/listShipper";
+        $method = "GET";
+
+        $result = $API->CallAPI($method, $url, $payload);
+
+        return $result;
+    }
+
+    public function shopUpdateOrder() {
+        $API = new API();
+        $url = "http://localhost:3000/api/orders/updateOrderWithShipperId";
+        $method = "POST";
+        $shipper_id = $_POST["shipper_id"];
+        $order_id = $_POST["order_id"];
+        $payload = array(
+            "shipper_id" => $shipper_id,
+            "order_id" => $order_id
+        );
+        $result = $API->CallAPI($method, $url, $payload);
+        return $result;
     }
 }
