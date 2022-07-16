@@ -1,0 +1,127 @@
+<script type="text/javascript">
+    // let get = function(currentPage, currentSize) {
+
+    //     let page = currentPage ?? 1;
+    //     let size = currentSize ?? 10;
+
+    //     let from = $("#search-from-date")[0].value;
+    //     let to = $("#search-to-date")[0].value;
+
+    //     $.post({
+    //         url: `index.php?action=search-health-history`,
+    //         data: {
+    //             page,
+    //             size,
+    //             from,
+    //             to
+
+    //         },
+    //         success: function(response) {
+    //             $("#health-history").html(response)
+
+    //         }
+    //     });
+
+
+    // };
+    // $(document).ready(function() {
+
+    //     const now = new Date().toISOString().substring(0, 10);
+
+    //     document.getElementById('date').value = now;
+    // });
+    let totalCost = (data) => {
+        console.log("zxc", data)
+    }
+</script>
+
+
+<h1>Đơn hàng của bạn</h1>
+<?php if ($data == null) : ?>
+    <h2>Bạn không có sản phẩm nào trong giỏ hàng. Click <a href="index.php?action=cusViewStore"><button class="primary">vào đây</button></a> để bắt đầu mua sắm</h2>
+
+<?php else : ?>
+
+    <h2>
+        Danh sách sản phẩm
+    </h2>
+    <table class="full-width table-auto mt-24">
+        <thead>
+            <tr>
+                <th style="width: 200px"></th>
+                <th style="text-align: center;width: 300px">Tên sản phẩm</th>
+                <th style="text-align: center; width: 200px;">Giá tiền</th>
+                <th style="text-align: center; width: 200px;">Số lượng</th>
+                <th style="text-align: center; width: 200px;">Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+
+            foreach ($data as $key => $item) {
+            ?>
+
+
+                <tr style="height: 40px">
+
+                    <td style="width: 150px">
+                        <img src="images/food.jpeg" width="150px" height="100px" />
+                    </td>
+                    <td style="text-align: center;width: 300px">
+                        <?= $item->name ?>
+                    </td>
+                    <td style="text-align: center; width: 200px;">
+                        <?= $item->unit_price ?>
+                    </td>
+                    <td style="text-align: center; width: 200px;">
+                        1
+                    </td>
+                    <td style="text-align: center; width: 200px;">
+                        <?= $item->unit_price ?> ﹩
+
+                    </td>
+
+                </tr>
+
+            <?php
+            }
+            ?>
+            <tr style="height: 40px">
+
+                <td style="width: 150px">
+
+                </td>
+                <td style="text-align: center;width: 300px">
+
+                </td>
+                <td style="text-align: center; width: 200px;border-top: 1px solid">
+                    <b>
+                        Tổng cộng
+
+                    </b>
+                </td>
+                <td style="text-align: center; width: 200px;border-top: 1px solid">
+                    <?= count($data) ?>
+
+                </td>
+                <td style="text-align: center; width: 200px;border-top: 1px solid">
+                    <?php
+                    $total = 0;
+                    foreach ($data as $key => $item) {
+                    
+
+                        $total += $item->unit_price;
+
+
+                    
+                    }
+                    echo "$total ﹩";
+                    ?>
+                </td>
+
+             
+            </tr>
+        </tbody>
+    </table>
+    <button class="primary full-width mt-24">Đặt hàng</button>
+<?php endif ?>
