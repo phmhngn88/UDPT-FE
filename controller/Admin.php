@@ -102,23 +102,37 @@ class AdminController
         require($VIEW);
     }
 
-
-    public function listReview() {
-        $API = new API();
-        $url = "http://localhost:3000/api/reviews";
-        $method = "GET";
-
-        $result = $this->getReviews();
-        
-        $data = $result->data->products;
-
+    public function viewReview() {
         $VIEW = "./view/Admin/DanhGia.phtml";
         require("./template/admin.phtml");
     }
 
+
+    public function listReview() {
+        $limit = $_POST["limit"];
+        $offset = $_POST["offset"]; 
+        $search = $_POST["search"]; 
+        
+
+        $payload = array(
+            "limit" => $limit,
+            "offset" => $offset,
+            "search" => $search,
+        );
+
+        $getData = $this->getReviews($payload);
+        $data = $getData->data->comments;
+        $total = $getData->data->commentsCount;
+        $currentPage = ($offset + $limit) / $limit;
+
+        $VIEW = "./view/Admin/DanhGiaAJAX.phtml";
+        require($VIEW);
+
+    }
+
     private function getReviews() {
         $API = new API();
-        $url = "http://localhost:3000/api/reviews";
+        $url = "http://localhost:3000/api/system-reviews";
         $method = "GET";
 
         $result = $API->CallAPI($method, $url, null);
@@ -165,6 +179,24 @@ class AdminController
         $method = "PUT";
 
         $result = $API->CallAPI($method, $url, null);
+        
+        return $result;
+    }
+
+    public function replyComment() {
+        $id = $_POST["id"];
+        $content = $_POST["content"];
+        echo $content;
+
+        $API = new API();
+        $url = "http://localhost:3000/api/system-reviews/reply/$id";
+        $method = "POST";
+
+        $payload = array(
+            "content" => $content,
+        );
+
+        $result = $API->CallAPI($method, $url, $payload);
         
         return $result;
     }

@@ -158,11 +158,21 @@ switch ($action) {
         $controller->listCustomer();
         break;
 
+    case "viewReview":
+        $controller = new AdminController();
+        $controller->viewReview();
+        break;
+
     case "listReview":
         $controller = new AdminController();
         $controller->listReview();
         break;
         
+    case "replyComment":
+        $controller = new AdminController();
+        $controller->replyComment();
+        break;
+
     case "updateShopStatus":
         $controller = new AdminController();
         $controller->updateShopStatus();
